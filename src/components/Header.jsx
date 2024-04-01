@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import profilepic from '../assets/profile pic.webp'
 function Header() {
-    const [menuBtn , setMenuBtn] = useState("hidden")
+    const [menuBtn, setMenuBtn] = useState("hidden")
 
-    const menubtn = ()=>{
+    const menubtn = () => {
         const btn = menuBtn === "hidden" ? "flex" : "hidden";
         setMenuBtn(btn)
     }
@@ -48,22 +48,21 @@ function Header() {
                     </svg>
                     <div className="flex items-center px-2 py-1 border-2 rounded-full hover:shadow-md">
                         <div class="relative inline-block text-left">
-                            <div>
-                                <button
-                                    type="button"
-                                    onClick={menubtn}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512"
-                                        className='w-4 h-4 mx-2'>
-                                        <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                                    </svg>
-                                </button>
-                            </div>
+                            <button
+                                type="button"
+                                onClick={menubtn}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"
+                                    className='w-4 h-4 mx-2'>
+                                    <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                                </svg>
+                            </button>
+
                             <div
                                 className={`${menuBtn} absolute right-0 z-10 mt-3 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`} >
-                                <div 
+                                <div
                                     className="w-48" >
                                     <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" >Login</a>
                                     <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" >Sign up</a>
@@ -81,6 +80,12 @@ function Header() {
 
                 </div>
             </div>
+            <div className='flex justify-center'>
+                <div className='flex border-2 rounded-full '>
+                    sdfsdf
+                </div>
+            </div>
+
 
         </div>
     )
