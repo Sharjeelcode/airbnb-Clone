@@ -1,8 +1,27 @@
 import React, { useState } from "react";
 import useSigninModal, { SigninModalProvider } from "../Hooks/signinModal";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../Firebase/config";
 
 function Signup() {
   const { SignUpmodal, CloseSignUpModal } = useSigninModal();
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [user, setsuser] = useState();
+
+  const auth = getAuth();
+
+  const HandleSignUp = async (e) => {
+    e.preventDefault();
+    await signInWithEmailAndPassword(auth, Email, Password);
+    onAuthStateChanged(auth, (user) => setsuser(user.uid));
+    console.log(user);
+  };
 
   return (
     <div>
@@ -11,7 +30,7 @@ function Signup() {
           className={`${SignUpmodal} flex overflow-x-hidden  overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center`}
         >
           <div className="relative w-full   max-w-md px-4 h-full md:h-auto">
-            <div className="bg-white rounded-lg shadow relative dark:bg-gray-700">
+            <div className="bg-white opacity-100 rounded-lg shadow relative dark:bg-gray-700">
               <div className="flex justify-end p-2">
                 <button
                   type="button"
@@ -45,6 +64,8 @@ function Signup() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Enter your Name"
                     required=""
+                    value={Name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div>
@@ -60,6 +81,8 @@ function Signup() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name@company.com"
                     required=""
+                    value={Email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -76,12 +99,15 @@ function Signup() {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     required=""
+                    value={Password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
 
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  onClick={HandleSignUp}
                 >
                   Login to your account
                 </button>

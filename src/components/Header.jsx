@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import profilepic from "../assets/profile pic.webp";
 import searchicon from "../assets/search icon.png";
-import Signup from "./Modals/Signup";
-import useSigninModal, { SigninModalProvider } from "./Hooks/signinModal";
-import Login from "./Modals/Login";
+import Signup from "../Modals/Signup";
+import useSigninModal, { SigninModalProvider } from "../Hooks/signinModal";
+import Login from "../Modals/Login";
 function Header() {
   const [menuBtn, setMenuBtn] = useState("hidden");
   const [SignUpmodal, setSignUpmodal] = useState();
