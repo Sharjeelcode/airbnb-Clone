@@ -39,6 +39,8 @@ function Signup() {
     try {
       signInWithPopup(auth, provider);
       const credential = await GoogleAuthProvider.credentialFromResult();
+      const token = await credential.accessToken;
+      const user = await result.user;
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
