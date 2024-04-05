@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import useSigninModal, { SigninModalProvider } from "../Hooks/signinModal";
 import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
-import { auth } from "../Firebase/config";
+import { app, auth, provider } from "../Firebase/config";
+import { faDiagramSuccessor } from "@fortawesome/free-solid-svg-icons";
 
 function Signup() {
   const { SignUpmodal, CloseSignUpModal } = useSigninModal();
@@ -15,14 +18,37 @@ function Signup() {
   const [user, setsuser] = useState();
 
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
 
   const HandleSignUp = async (e) => {
     e.preventDefault();
-    await signInWithEmailAndPassword(auth, Email, Password);
-    onAuthStateChanged(auth, (user) => setsuser(user.uid));
-    console.log(user);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        Email,
+        Password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, { displayName: Name });
+    } catch (error) {
+      console.log(error.code, error.message);
+    }
   };
 
+  const handleGoogle = async () => {
+    try {
+      signInWithPopup(auth, provider);
+      const credential = await GoogleAuthProvider.credentialFromResult();
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      signInWithPopup(auth, provider);
+    }
+  };
   return (
     <div>
       <div className="max-w-2xl mx-auto">
@@ -113,7 +139,10 @@ function Signup() {
                 </button>
               </form>
               <div className="flex justify-center px-6 pb-2 sm:pb-4 xl:pb-8">
-                <button class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <button
+                  onClick={handleGoogle}
+                  class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
                   <svg
                     className="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
