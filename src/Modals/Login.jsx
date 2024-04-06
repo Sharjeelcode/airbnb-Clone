@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import useSigninModal from "../Hooks/signinModal";
-
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import useCheckAuth from "../Hooks/checkAuth";
 function Login() {
   const { LoginModal, closeLoginModal } = useSigninModal();
+  const [Email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
 
+  const { acessUser } = useCheckAuth();
+
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  // Signin with id pass
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, Email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        acessUser;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
+
+  // signin with google
+  const handleGoogle = async () => {
+    try {
+      signInWithPopup(auth, provider);
+      const credential = await GoogleAuthProvider.credentialFromResult();
+      const token = await credential.accessToken;
+      const user = await result.user;
+      acessUser;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className=" max-w-2xl mx-auto">
@@ -42,6 +82,8 @@ function Login() {
                   <input
                     type="text"
                     name="name"
+                    value={Email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Enter your Name"
                     required=""
@@ -58,6 +100,8 @@ function Login() {
                     type="password"
                     name="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setpassword(e.target.value)}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     required=""
@@ -66,13 +110,17 @@ function Login() {
 
                 <button
                   type="submit"
+                  onClick={handleLogin}
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Login to your account
                 </button>
               </form>
               <div className="flex justify-center px-6 pb-2 sm:pb-4 xl:pb-8">
-                <button class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <button
+                  onClick={handleGoogle}
+                  class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
                   <svg
                     class="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"

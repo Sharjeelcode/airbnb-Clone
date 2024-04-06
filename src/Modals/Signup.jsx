@@ -20,6 +20,7 @@ function Signup() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
+  // signup with email pass
   const HandleSignUp = async (e) => {
     e.preventDefault();
     try {
@@ -35,6 +36,7 @@ function Signup() {
     }
   };
 
+  // signup with google
   const handleGoogle = async () => {
     try {
       signInWithPopup(auth, provider);
