@@ -5,12 +5,12 @@ function HeaderSeachBar() {
   return (
     <div className="flex justify-center">
       <div className="flex border-2 rounded-full shadow-md gap-3">
-        <div className="px-2 py-2 items-center text-sm  rounded-full hover:bg-gray-100">
-          <h1 className="text-xs  px-3">Where</h1>
+        <div className="px-2 ml-4 flex flex-col  py-2 justify-center text-sm  rounded-full hover:bg-gray-100">
+          <h1 className="text-xs text-left">Where</h1>
           <input
             type="text"
             placeholder="Search destination"
-            className="border-none outline-none text-sm bg-transparent"
+            className="border-none px-0 py-0 outline-none text-sm bg-transparent"
           />
         </div>
         <button className="py-4 px-4  text-sm rounded-full border-none outline-none hover:bg-gray-100 text-left">
