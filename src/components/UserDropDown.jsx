@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import useCheckAuth from "../Hooks/checkAuth";
@@ -21,7 +21,7 @@ function UserDropDown() {
     } else {
       setprofilePic(randomProfile);
     }
-  });
+  },[auth.currentUser.photoURL]);
   return (
     <>
       <div className="flex items-center px-2 py-1 border-2 rounded-full hover:shadow-md">

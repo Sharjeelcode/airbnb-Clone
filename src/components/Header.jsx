@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import HeaderSeachBar from "./HeaderSeachBar";
 import GuestDropDown from "./GuestDropDown";
 import UserDropDown from "./UserDropDown";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { CheckAuthProvider } from "../Hooks/checkAuth";
 import MobileHeader from "./MobileHeader";
 function Header() {
@@ -27,8 +27,13 @@ function Header() {
     setuser(true);
   };
 
-  const denieUser = () => {
-    setuser(false);
+  const denieUser = async() => {
+    try {
+      signOut(auth)
+      setuser(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <CheckAuthProvider value={{ user, acessUser, denieUser }}>
