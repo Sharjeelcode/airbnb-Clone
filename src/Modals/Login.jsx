@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import useSigninModal from "../Hooks/signinModal";
 import {
   GoogleAuthProvider,
@@ -18,27 +18,21 @@ function Login() {
   const provider = new GoogleAuthProvider();
 
   // Signin with id pass
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, Email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        acessUser;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    try {
+      signInWithEmailAndPassword(auth, Email, password)
+      acessUser;
+    } catch (error) {
+      console.log(error);
+    }
+     
   };
 
   // signin with google
   const handleGoogle = async () => {
     try {
       signInWithPopup(auth, provider);
-      const credential = await GoogleAuthProvider.credentialFromResult();
-      const token = await credential.accessToken;
-      const user = await result.user;
       acessUser;
     } catch (error) {
       console.log(error);
@@ -119,10 +113,10 @@ function Login() {
               <div className="flex justify-center px-6 pb-2 sm:pb-4 xl:pb-8">
                 <button
                   onClick={handleGoogle}
-                  class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <svg
-                    class="h-6 w-6 mr-2"
+                    className="h-6 w-6 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="800px"
