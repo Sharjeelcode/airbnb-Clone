@@ -5,7 +5,7 @@ function HeaderSeachBar() {
   return (
     <div className="flex justify-center">
       <div className="flex border-2 rounded-full shadow-md gap-3">
-        <div className="px-2 ml-4 flex flex-col  py-2 justify-center text-sm  rounded-full hover:bg-gray-100">
+        <div className="px-4   flex flex-col  py-2 justify-center text-sm  rounded-full hover:bg-gray-100">
           <h1 className="text-xs text-left">Where</h1>
           <input
             type="text"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import HeaderSeachBar from "./HeaderSeachBar";
 import GuestDropDown from "./GuestDropDown";
@@ -6,6 +6,7 @@ import UserDropDown from "./UserDropDown";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { CheckAuthProvider } from "../Hooks/checkAuth";
 import MobileHeader from "./MobileHeader";
+import Catagorybar from "./Catagorybar";
 function Header() {
   const [user, setuser] = useState();
 
@@ -27,9 +28,9 @@ function Header() {
     setuser(true);
   };
 
-  const denieUser = async() => {
+  const denieUser = async () => {
     try {
-      signOut(auth)
+      signOut(auth);
       setuser(false);
     } catch (error) {
       console.log(error);
@@ -41,8 +42,8 @@ function Header() {
       <MobileHeader />
 
       {/* header for large devices */}
-      <div className=" hidden  border-b-2 md:pb-4 md:block">
-        <div className="px-10 h-20 flex items-center justify-between">
+      <div className=" hidden sticky bg-white top-0 border-b-2 md:pb-2 md:block">
+        <div className="px-10 h-16 flex items-center justify-between">
           <img className="hidden md:block w-8 h-8 md:mr-48" src={logo} />
           <div className="flex w-96  justify-around">
             <span className="rounded-full  px-4 py-2 hover:bg-gray-100 hover:text-black">
@@ -73,6 +74,7 @@ function Header() {
           </div>
         </div>
         <HeaderSeachBar />
+        <Catagorybar />
       </div>
     </CheckAuthProvider>
   );
