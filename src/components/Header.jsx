@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { CheckAuthProvider } from "../Hooks/checkAuth";
 import MobileHeader from "./MobileHeader";
 import Catagorybar from "./Catagorybar";
+import { NavLink } from "react-router-dom";
 function Header() {
   const [user, setuser] = useState();
 
@@ -42,9 +43,11 @@ function Header() {
       <MobileHeader />
 
       {/* header for large devices */}
-      <div className=" hidden sticky bg-white top-0 border-b-2 md:pb-2 md:block">
+      <div className="z-50 hidden sticky bg-white top-0 border-b-2 md:pb-2 md:block">
         <div className="px-10 h-16 flex items-center justify-between">
-          <img className="hidden md:block w-8 h-8 md:mr-48" src={logo} />
+          <NavLink to={"/"}>
+            <img className="hidden md:block w-8 h-8 md:mr-48" src={logo} />
+          </NavLink>
           <div className="flex w-96  justify-around">
             <span className="rounded-full  px-4 py-2 hover:bg-gray-100 hover:text-black">
               Stays
@@ -57,9 +60,11 @@ function Header() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="rounded-full px-3 text-md py-2 hover:bg-gray-100 hover:text-black">
-              Airbnb your home
-            </span>
+            <NavLink to={"yourhome"}>
+              <span className="rounded-full px-3 text-md py-2 hover:bg-gray-100 hover:text-black">
+                Airbnb your home
+              </span>
+            </NavLink>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"

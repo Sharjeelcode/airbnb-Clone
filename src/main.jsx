@@ -9,11 +9,13 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Landingpage from "./pages/Landingpage.jsx";
+import YourHome from "./pages/YourHome.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
       <Route path="/landingpage" element={<Landingpage />} />
+      <Route path="/yourhome" element={<YourHome />} />
     </Route>
   )
 );

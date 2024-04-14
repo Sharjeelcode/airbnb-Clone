@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import useCheckAuth from "../Hooks/checkAuth";
@@ -14,7 +14,6 @@ function UserDropDown() {
 
   const { denieUser } = useCheckAuth();
 
-
   const auth = getAuth();
   useEffect(() => {
     if (auth.currentUser.photoURL !== null) {
@@ -22,7 +21,7 @@ function UserDropDown() {
     } else {
       setprofilePic(randomProfile);
     }
-  },[auth.currentUser.photoURL]);
+  }, [auth.currentUser.photoURL]);
   return (
     <>
       <div className="flex items-center px-2 py-1 border-2 rounded-full hover:shadow-md">
@@ -50,7 +49,10 @@ function UserDropDown() {
                 WishList
               </NavLink>
               <hr />
-              <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
+              <NavLink
+                to={"/yourhome"}
+                className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+              >
                 Airbnb your home
               </NavLink>
               <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
