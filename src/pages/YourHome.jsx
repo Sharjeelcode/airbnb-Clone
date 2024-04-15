@@ -1,56 +1,59 @@
-import { Carousel, IconButton } from "@material-tailwind/react";
+import home1 from "../assets/home1.webp";
+import home2 from "../assets/home2.webp";
+import home3 from "../assets/home3.webp";
 function YourHome() {
   return (
     <>
-      <div>
-        <Carousel
-          className="h-96 "
-          prevArrow={({ handlePrev }) => (
-            <IconButton
-              variant="text"
-              color="black"
-              size="lg"
-              onClick={handlePrev}
-              className="!absolute top-2/4 left-4 -translate-y-2/4 bg-white rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                />
-              </svg>
-            </IconButton>
-          )}
-          nextArrow={({ handleNext }) => (
-            <IconButton
-              variant="text"
-              color="white"
-              size="lg"
-              onClick={handleNext}
-              className="!absolute top-2/4 !right-4 -translate-y-2/4 "
-            >
-              <h1 className="bg-pink-700 rounded p-2">Next</h1>
-            </IconButton>
-          )}
-        >
-          <div className="flex justify-center items-center h-full">
-            <h1>hkfj</h1>
+      <div className="flex justify-around my-5 ">
+        <div className="flex items-center">
+          <h1 className="text-6xl font-medium">
+            it's easy to get <br />
+            started on Airbnb
+          </h1>
+        </div>
+        <div>
+          <div className="flex pb-8">
+            <h1 className="font-bold px-2 text-xl">1</h1>
+            <div className="">
+              <h1 className="font-bold text-xl">Tell us about your place</h1>
+              <p className="text-gray-500">
+                Share some basic info, such as where it is and how <br /> many
+                guests can stay.
+              </p>
+            </div>
+            <div>
+              <img src={home1} alt="" className="w-28 h-28 " />
+            </div>
           </div>
-          <div className="flex justify-center items-center">
-            <h1>hfdggfdgdgdffdkh</h1>
+          <hr />
+          <div className="flex pt-4 pb-8">
+            <h1 className="font-bold px-2 text-xl">2</h1>
+            <div className="">
+              <h1 className="font-bold text-xl">Make it stand out</h1>
+              <p className="text-gray-500">
+                Add 5 or more photos plus a title and description – <br /> we’ll
+                help you out.
+              </p>
+            </div>
+            <div>
+              <img src={home2} alt="" className="w-28 h-28 " />
+            </div>
           </div>
-          <div className="flex justify-center items-center">
-            <h1>dgdffdkh</h1>
+          <hr />
+          <div className="flex pt-4 pb-8">
+            <h1 className="font-bold px-2 text-xl">2</h1>
+            <div className="">
+              <h1 className="font-bold text-xl">Finish up and publish</h1>
+              <p className="text-gray-500">
+                Choose if you'd like to start with an experienced <br /> guest,
+                set a starting price and publish your listing.
+              </p>
+            </div>
+            <div>
+              <img src={home3} alt="" className="w-28 h-28 " />
+            </div>
           </div>
-        </Carousel>
+        </div>
       </div>
     </>
   );

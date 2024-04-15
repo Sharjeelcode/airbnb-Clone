@@ -7,9 +7,16 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { CheckAuthProvider } from "../Hooks/checkAuth";
 import MobileHeader from "./MobileHeader";
 import Catagorybar from "./Catagorybar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 function Header() {
   const [user, setuser] = useState();
+  const [Head, setHead] = useState(true);
+
+  // checks the page location and changes the header
+  const location = useLocation();
+  useEffect(() => {
+    location.pathname === "/yourhome" ? setHead(false) : setHead(true);
+  }, [location.pathname]);
 
   const auth = getAuth();
 
@@ -78,8 +85,12 @@ function Header() {
             {user === true ? <UserDropDown /> : <GuestDropDown />}
           </div>
         </div>
-        <HeaderSeachBar />
-        <Catagorybar />
+        {Head && (
+          <div>
+            <HeaderSeachBar />
+            <Catagorybar />
+          </div>
+        )}
       </div>
     </CheckAuthProvider>
   );
