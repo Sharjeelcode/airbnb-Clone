@@ -5,14 +5,17 @@ import Home1 from "../components/YourHomeComponents/Home1";
 import Home2 from "../components/YourHomeComponents/Home2";
 import Home3 from "../components/YourHomeComponents/Home3";
 import Home4 from "../components/YourHomeComponents/Home4";
+import useSigninModal from "../Hooks/signinModal";
 function YourHome() {
   const [currentStep, setCurrentStep] = useState(1);
-
   const { user } = useCheckAuth();
-  console.log(user);
+  const { openLoginModal } = useSigninModal();
+
   const handleNextStep = () => {
     if (currentStep < 4 && user) {
       setCurrentStep(currentStep + 1);
+    } else {
+      openLoginModal();
     }
   };
   const handlePrevStep = () => {

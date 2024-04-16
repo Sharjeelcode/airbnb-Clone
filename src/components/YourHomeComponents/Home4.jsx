@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Textarea, Button } from "@material-tailwind/react";
 import UploadImages from "../UploadImages";
+import useCheckAuth from "../../Hooks/checkAuth";
 function Home4() {
   const [Guest, setGuest] = useState(0);
   const [Bedroom, setBedroom] = useState(0);
   const [Bed, setBed] = useState(0);
   const [privateBathroom, setprivateBathroom] = useState(0);
+  const { user } = useCheckAuth();
+  useEffect(() => {
+    if (!user) {
+      console.log("logout");
+      location.reload();
+    }
+  }, [user]);
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">

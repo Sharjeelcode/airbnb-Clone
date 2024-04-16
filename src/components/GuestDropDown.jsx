@@ -1,49 +1,23 @@
 import React, { useState } from "react";
 import profilepic from "../assets/profile pic.webp";
-import { SigninModalProvider } from "../Hooks/signinModal";
+import useSigninModal from "../Hooks/signinModal";
 import Signup from "../Modals/Signup";
 import Login from "../Modals/Login";
 
 function GuestDropDown() {
-  const [menuBtn, setMenuBtn] = useState("hidden");
-  const [SignUpmodal, setSignUpmodal] = useState();
-  const [LoginModal, setSignLoginModal] = useState();
-
-  const openSignUpModal = () => {
-    setMenuBtn("hidden");
-    setSignUpmodal(true);
-  };
-
-  const CloseSignUpModal = () => {
-    setSignUpmodal(false);
-  };
-  const openLoginModal = () => {
-    setMenuBtn("hidden");
-    setSignLoginModal(true);
-  };
-
-  const closeLoginModal = () => {
-    setSignLoginModal(false);
-  };
-
-  const menubtn = () => {
-    const btn = menuBtn === "hidden" ? "flex" : "hidden";
-    setMenuBtn(btn);
-  };
+  const {
+    menuBtn,
+    SignUpmodal,
+    LoginModal,
+    openLoginModal,
+    openSignUpModal,
+    toggleMenubtn,
+  } = useSigninModal();
 
   return (
-    <SigninModalProvider
-      value={{
-        SignUpmodal,
-        LoginModal,
-        openSignUpModal,
-        CloseSignUpModal,
-        openLoginModal,
-        closeLoginModal,
-      }}
-    >
+    <>
       <div className="flex items-center  px-2 py-1 border-2 rounded-full hover:shadow-md">
-        <button type="button" onClick={menubtn}>
+        <button type="button" onClick={toggleMenubtn}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -90,7 +64,7 @@ function GuestDropDown() {
       </div>
       {SignUpmodal && <Signup />}
       {LoginModal && <Login />}
-    </SigninModalProvider>
+    </>
   );
 }
 

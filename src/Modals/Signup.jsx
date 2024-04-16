@@ -11,7 +11,7 @@ import { app, auth, provider } from "../Firebase/config";
 import { faDiagramSuccessor } from "@fortawesome/free-solid-svg-icons";
 
 function Signup() {
-  const { SignUpmodal, CloseSignUpModal } = useSigninModal();
+  const { SignUpmodal, closeSignUpModal } = useSigninModal();
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -64,7 +64,7 @@ function Signup() {
                   type="button"
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                   data-modal-toggle="authentication-modal"
-                  onClick={CloseSignUpModal}
+                  onClick={closeSignUpModal}
                 >
                   <svg
                     className="w-5 h-5"

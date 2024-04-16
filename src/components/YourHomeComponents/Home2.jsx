@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import homevideo from "../../assets/homevideo.mp4";
 import useCheckAuth from "../../Hooks/checkAuth";
-import useSigninModal from "../../Hooks/signinModal";
 
 function Home2() {
   const { user } = useCheckAuth();
-  const { openLoginModal } = useSigninModal();
+
   useEffect(() => {
     if (!user) {
       console.log("logout");
-      openLoginModal;
+      location.reload();
     }
   }, [user]);
 

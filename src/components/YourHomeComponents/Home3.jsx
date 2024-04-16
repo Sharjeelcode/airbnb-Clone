@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useCheckAuth from "../../Hooks/checkAuth";
 
 function Home3() {
   const [Place, setPlace] = useState("");
-
+  const { user } = useCheckAuth();
+  useEffect(() => {
+    if (!user) {
+      console.log("logout");
+      location.reload();
+    }
+  }, [user]);
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">
