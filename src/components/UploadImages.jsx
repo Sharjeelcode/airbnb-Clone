@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function UploadImages() {
   const [files, setFile] = useState([]);
   const [message, setMessage] = useState();
-  console.log(files);
   const handleFile = (e) => {
     setMessage("");
     let file = e.target.files;
@@ -13,6 +12,7 @@ function UploadImages() {
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
+        console.log(URL.createObjectURL(files[1]));
       } else {
         setMessage("only images accepted");
       }
@@ -26,7 +26,7 @@ function UploadImages() {
   return (
     <>
       <div class="flex justify-center items-center px-3 pb-4">
-        <div class="rounded-lg  shadow-xl bg-gray-50 w-1/2  md:w-full">
+        <div class="rounded-lg  shadow-md bg-gray-50 w-1/2  md:w-full">
           <div class="m-4">
             <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
               {message}

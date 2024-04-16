@@ -446,12 +446,16 @@ function YourHome() {
           <h1 className="text-center mt-2 font-medium text-3xl">
             Which of these best describes your place?
           </h1>
-          <div className="flex justify-center  ">
-            <form action="" className=" w-72 md:w-auto border-2 flex flex-col">
+          <div className="flex justify-center my-4  ">
+            <form
+              action=""
+              className=" w-72 md:w-auto border-2 rounded shadow-lg flex flex-col"
+            >
               <div className="flex flex-col gap-3 p-3">
                 <Input type="email" color="black" label="Hosted by" />
                 <Input type="email" color="black" label="Location" />
                 <Input type="email" color="black" label="Place Name" />
+                <Input type="number" color="black" label="Price" />
                 <Textarea size="lg" label="About this space " className="" />
               </div>
               <div>
@@ -572,7 +576,7 @@ function YourHome() {
                       required
                     />
                     <div class="absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-gray-400 space-x-1 rtl:space-x-reverse">
-                      <span>Beds</span>
+                      <span>Bedrooms</span>
                     </div>
                     <button
                       onClick={() => setBedroom(Bedroom + 1)}
@@ -747,11 +751,13 @@ function YourHome() {
                 </div>
               </div>
               <UploadImages />
-              <div className="flex  justify-center rounded py-2"></div>
-              <input
-                type="submit"
-                className="bg-black text-white p-3 rounded  "
-              />
+              <div className="flex  justify-center rounded py-2">
+                <input
+                  type="submit"
+                  value={"Publish your home"}
+                  className="bg-[#FE375C] text-white p-3 rounded"
+                />
+              </div>
             </form>
           </div>
         </div>
