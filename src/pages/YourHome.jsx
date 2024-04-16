@@ -6,10 +6,14 @@ import Home2 from "../components/YourHomeComponents/Home2";
 import Home3 from "../components/YourHomeComponents/Home3";
 import Home4 from "../components/YourHomeComponents/Home4";
 import useSigninModal from "../Hooks/signinModal";
+import { LocalDataStoreProvider } from "../Hooks/localDataStore";
+
 function YourHome() {
   const [currentStep, setCurrentStep] = useState(1);
   const { user } = useCheckAuth();
   const { openLoginModal } = useSigninModal();
+  const [placeView, setplaceView] = useState();
+  // const [currentUser, setcurrentUser] = useState();
 
   const handleNextStep = () => {
     if (currentStep < 4 && user) {
@@ -23,8 +27,14 @@ function YourHome() {
       setCurrentStep(currentStep - 1);
     }
   };
+  // define all function of localdatastore
+
+  const yourplaceView = (e) => {
+    setplaceView(e);
+  };
+
   return (
-    <>
+    <LocalDataStoreProvider value={{ yourplaceView, placeView }}>
       {currentStep === 1 && <Home1 />}
 
       {currentStep === 2 && <Home2 />}
@@ -58,7 +68,7 @@ function YourHome() {
           )}
         </div>
       )}
-    </>
+    </LocalDataStoreProvider>
   );
 }
 

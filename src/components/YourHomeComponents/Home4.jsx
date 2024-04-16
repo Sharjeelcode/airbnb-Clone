@@ -25,11 +25,11 @@ function Home4() {
           className=" w-72 md:w-auto border-2 rounded shadow-lg flex flex-col"
         >
           <div className="flex flex-col gap-3 p-3">
-            <Input type="email" color="black" label="Hosted by" />
-            <Input type="email" color="black" label="Location" />
-            <Input type="email" color="black" label="Place Name" />
-            <Input type="number" color="black" label="Price" />
-            <Textarea size="lg" label="About this space " className="" />
+            <Input type="email" color="black" label="Hosted by" required />
+            <Input type="email" color="black" label="Location" required />
+            <Input type="email" color="black" label="Place Name" required />
+            <Input type="number" color="black" label="Price" required />
+            <Textarea size="lg" label="About this space " required />
           </div>
           <div>
             <div className="flex items-center justify-between gap-4 p-2">

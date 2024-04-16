@@ -13,6 +13,7 @@ function App() {
   const [SignUpmodal, setSignUpmodal] = useState();
   const [LoginModal, setSignLoginModal] = useState();
 
+  // render footer according to pageLocation
   const location = useLocation();
   useEffect(() => {
     location.pathname === "/yourhome" ? setfooter(false) : setfooter(true);
@@ -20,6 +21,7 @@ function App() {
 
   const auth = getAuth();
 
+  //logoutUser
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -47,8 +49,7 @@ function App() {
     }
   };
 
-  // modal
-
+  // modal show and hide
   const openLoginModal = () => {
     setMenuBtn("hidden");
     setSignLoginModal(true);

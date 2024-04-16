@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import useCheckAuth from "../../Hooks/checkAuth";
+import useLocalDataStore from "../../Hooks/localDataStore";
 
 function Home3() {
-  const [Place, setPlace] = useState("");
+  // const [Place, ] = useState("");
   const { user } = useCheckAuth();
+
+  // check user auth
   useEffect(() => {
     if (!user) {
       console.log("logout");
       location.reload();
     }
   }, [user]);
+
+  const { placeView, yourplaceView } = useLocalDataStore();
+  console.log(placeView);
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">
@@ -18,9 +24,9 @@ function Home3() {
       <div className="flex justify-center m-5">
         <div className="grid gap-3 grid-cols-4">
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "OMG!" ? "border-black" : "hover:border-black"
+              placeView === "OMG!" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -32,9 +38,9 @@ function Home3() {
           </button>
           <button
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "New" ? "border-black" : "hover:border-black"
+              placeView === "New" ? "border-black" : "hover:border-black"
             }`}
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
           >
             <img
               src="https://a0.muscache.com/pictures/c0fa9598-4e37-40f3-b734-4bd0e2377add.jpg"
@@ -44,9 +50,9 @@ function Home3() {
             <span className="text-sm mt-3">New</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Arctic" ? "border-black" : "hover:border-black"
+              placeView === "Arctic" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -57,9 +63,9 @@ function Home3() {
             <span className="text-sm mt-3">Arctic</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Top of the world"
+              placeView === "Top of the world"
                 ? "border-black"
                 : "hover:border-black"
             }`}
@@ -72,9 +78,9 @@ function Home3() {
             <span className="text-sm mt-3">Top of the world</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Tropical" ? "border-black" : "hover:border-black"
+              placeView === "Tropical" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -85,9 +91,9 @@ function Home3() {
             <span className="text-sm mt-3">Tropical</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Tower" ? "border-black" : "hover:border-black"
+              placeView === "Tower" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -98,9 +104,9 @@ function Home3() {
             <span className="text-sm mt-3">Tower</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Dammusi" ? "border-black" : "hover:border-black"
+              placeView === "Dammusi" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -111,9 +117,9 @@ function Home3() {
             <span className="text-sm mt-3">Dammusi</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Historical homes"
+              placeView === "Historical homes"
                 ? "border-black"
                 : "hover:border-black"
             }`}
@@ -127,9 +133,9 @@ function Home3() {
           </button>
 
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Campers" ? "border-black" : "hover:border-black"
+              placeView === "Campers" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -140,9 +146,9 @@ function Home3() {
             <span className="text-sm mt-3">Campers</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Islands" ? "border-black" : "hover:border-black"
+              placeView === "Islands" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -153,9 +159,11 @@ function Home3() {
             <span className="text-sm mt-3">Islands</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Amazing pools" ? "border-black" : "hover:border-black"
+              placeView === "Amazing pools"
+                ? "border-black"
+                : "hover:border-black"
             }`}
           >
             <img
@@ -166,9 +174,9 @@ function Home3() {
             <span className="text-sm mt-3">Amazing pools</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Surfing" ? "border-black" : "hover:border-black"
+              placeView === "Surfing" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -179,9 +187,9 @@ function Home3() {
             <span className="text-sm mt-3">Surfing</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Design" ? "border-black" : "hover:border-black"
+              placeView === "Design" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -192,9 +200,11 @@ function Home3() {
             <span className="text-sm mt-3">Design</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "National parks" ? "border-black" : "hover:border-black"
+              placeView === "National parks"
+                ? "border-black"
+                : "hover:border-black"
             }`}
           >
             <img
@@ -205,9 +215,9 @@ function Home3() {
             <span className="text-sm mt-3">National parks</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Rooms" ? "border-black" : "hover:border-black"
+              placeView === "Rooms" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -218,9 +228,9 @@ function Home3() {
             <span className="text-sm mt-3">Rooms</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Canvas" ? "border-black" : "hover:border-black"
+              placeView === "Canvas" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -232,9 +242,9 @@ function Home3() {
           </button>
 
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Beach" ? "border-black" : "hover:border-black"
+              placeView === "Beach" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -245,9 +255,9 @@ function Home3() {
             <span className="text-sm mt-3">Beach</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Bed and Breakfasts"
+              placeView === "Bed and Breakfasts"
                 ? "border-black"
                 : "hover:border-black"
             }`}
@@ -260,9 +270,9 @@ function Home3() {
             <span className="text-sm mt-3">Bed and Breakfasts</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Trending" ? "border-black" : "hover:border-black"
+              placeView === "Trending" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -273,9 +283,11 @@ function Home3() {
             <span className="text-sm mt-3">Trending</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Countryside" ? "border-black" : "hover:border-black"
+              placeView === "Countryside"
+                ? "border-black"
+                : "hover:border-black"
             }`}
           >
             <img
@@ -286,9 +298,9 @@ function Home3() {
             <span className="text-sm mt-3">Countryside</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Lake" ? "border-black" : "hover:border-black"
+              placeView === "Lake" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -299,9 +311,9 @@ function Home3() {
             <span className="text-sm mt-3">Lake</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Tiny homes" ? "border-black" : "hover:border-black"
+              placeView === "Tiny homes" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -312,9 +324,9 @@ function Home3() {
             <span className="text-sm mt-3">Tiny homes</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Mensions" ? "border-black" : "hover:border-black"
+              placeView === "Mensions" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
@@ -325,9 +337,9 @@ function Home3() {
             <span className="text-sm mt-3">Mensions</span>
           </button>
           <button
-            onClick={(e) => setPlace(e.target.textContent)}
+            onClick={(e) => yourplaceView(e.target.textContent)}
             className={`flex flex-col border-2 rounded items-center justify-center p-3 ${
-              Place === "Farms" ? "border-black" : "hover:border-black"
+              placeView === "Farms" ? "border-black" : "hover:border-black"
             }`}
           >
             <img
