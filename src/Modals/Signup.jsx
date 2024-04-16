@@ -15,11 +15,9 @@ function Signup() {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [user, setsuser] = useState();
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
   // signup with email pass
   const HandleSignUp = async (e) => {
     e.preventDefault();

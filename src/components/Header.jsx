@@ -4,48 +4,23 @@ import HeaderSeachBar from "./HeaderSeachBar";
 import GuestDropDown from "./GuestDropDown";
 import UserDropDown from "./UserDropDown";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { CheckAuthProvider } from "../Hooks/checkAuth";
+import useCheckAuth, { CheckAuthProvider, checkAuth } from "../Hooks/checkAuth";
 import MobileHeader from "./MobileHeader";
 import Catagorybar from "./Catagorybar";
 import { NavLink, useLocation } from "react-router-dom";
+import { ScissorsLineDashedIcon } from "lucide-react";
 function Header() {
-  const [user, setuser] = useState();
   const [Head, setHead] = useState(true);
-
+  const { user } = useCheckAuth();
+  ScissorsLineDashedIcon;
   // checks the page location and changes the header
   const location = useLocation();
   useEffect(() => {
     location.pathname === "/yourhome" ? setHead(false) : setHead(true);
   }, [location.pathname]);
 
-  const auth = getAuth();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setuser(true);
-      } else {
-        setuser(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const acessUser = () => {
-    setuser(true);
-  };
-
-  const denieUser = async () => {
-    try {
-      signOut(auth);
-      setuser(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
-    <CheckAuthProvider value={{ user, acessUser, denieUser }}>
+    <>
       {/* header for mobile devices */}
       <MobileHeader />
 
@@ -92,7 +67,7 @@ function Header() {
           </div>
         )}
       </div>
-    </CheckAuthProvider>
+    </>
   );
 }
 

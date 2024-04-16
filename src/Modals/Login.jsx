@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import useSigninModal from "../Hooks/signinModal";
 import {
   GoogleAuthProvider,
@@ -18,15 +18,14 @@ function Login() {
   const provider = new GoogleAuthProvider();
 
   // Signin with id pass
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      signInWithEmailAndPassword(auth, Email, password)
+      signInWithEmailAndPassword(auth, Email, password);
       acessUser;
     } catch (error) {
       console.log(error);
     }
-     
   };
 
   // signin with google
