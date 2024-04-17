@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { storage } from "../Firebase/config";
+import useLocalDataStore from "../Hooks/localDataStore";
 function UploadImages() {
   const [files, setFile] = useState([]);
   const [message, setMessage] = useState();
-  const { image, yourimage } = useState();
+  const { yourimage } = useLocalDataStore();
   const auth = getAuth();
   // upload to firebase
 
@@ -25,7 +26,7 @@ function UploadImages() {
           );
           await uploadBytes(imageRef, uploadedFile[i]);
           const url = await getDownloadURL(imageRef);
-          console.log(url);
+          yourimage(url);
         } catch (error) {
           console.log(error.message);
         }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { CheckAuthProvider } from "./Hooks/checkAuth";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { SigninModalProvider } from "./Hooks/signinModal";
+import { FireStoreDataProvider } from "./Hooks/fireStoreData";
 
 function App() {
   const [footer, setfooter] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   const [menuBtn, setMenuBtn] = useState("hidden");
   const [SignUpmodal, setSignUpmodal] = useState();
   const [LoginModal, setSignLoginModal] = useState();
+  const [adsData, setadsData] = useState([]);
 
   // render footer according to pageLocation
   const location = useLocation();
@@ -72,6 +74,13 @@ function App() {
     setMenuBtn(btn);
   };
 
+  //ads data getting from firestore and push to app
+
+  const pushadsData = (e) => {
+    setadsData((prevAdsData) => [...prevAdsData, e]);
+  };
+  // console.log(adsData);
+
   return (
     <>
       <SigninModalProvider
@@ -87,9 +96,11 @@ function App() {
         }}
       >
         <CheckAuthProvider value={{ user, acessUser, denieUser }}>
-          <Header />
-          <Outlet />
-          {footer && <Footer />}
+          <FireStoreDataProvider value={{ adsData, pushadsData }}>
+            <Header />
+            <Outlet />
+            {footer && <Footer />}
+          </FireStoreDataProvider>
         </CheckAuthProvider>
       </SigninModalProvider>
     </>

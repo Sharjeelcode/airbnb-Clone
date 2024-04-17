@@ -20,8 +20,9 @@ function YourHome() {
   const [host, sethost] = useState("");
   const [location, setlocation] = useState("");
   const [placeName, setplaceName] = useState("");
-  const [price, setprice] = useState("");
+  const [price, setprice] = useState(0);
   const [aboutPlace, setaboutPlace] = useState("");
+  const [image, setimage] = useState([]);
   // const [currentUser, setcurrentUser] = useState();
 
   const handleNextStep = () => {
@@ -68,7 +69,12 @@ function YourHome() {
   const yourprice = (e) => {
     setprice(e);
   };
+  const yourimage = (e) => {
+    setimage([...image, e]);
+  };
 
+  console.log(image);
+  console.log(host);
   return (
     <LocalDataStoreProvider
       value={{
@@ -82,6 +88,7 @@ function YourHome() {
         bedroom,
         bed,
         bathrom,
+        image,
         yourhost,
         yourlocation,
         yourplaceView,
@@ -92,6 +99,7 @@ function YourHome() {
         yourbedroom,
         yourbed,
         yourbathrom,
+        yourimage,
       }}
     >
       {currentStep === 1 && <Home1 />}

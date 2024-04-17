@@ -3,6 +3,8 @@ import { Input, Textarea, Button } from "@material-tailwind/react";
 import UploadImages from "../UploadImages";
 import useCheckAuth from "../../Hooks/checkAuth";
 import useLocalDataStore from "../../Hooks/localDataStore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { database } from "../../Firebase/config";
 
 function Home4() {
   const [Guest, setGuest] = useState(0);
@@ -11,7 +13,6 @@ function Home4() {
   const [privateBathroom, setprivateBathroom] = useState(0);
 
   const { user } = useCheckAuth();
-
   // checks current user authentication
   useEffect(() => {
     if (!user) {
@@ -26,16 +27,47 @@ function Home4() {
     placeName,
     price,
     aboutPlace,
+    placeView,
+    guest,
+    bedroom,
+    bed,
+    bathrom,
+    image,
     yourhost,
+    yourguest,
+    yourbathrom,
+    yourbed,
+    yourbedroom,
+    yourprice,
     yourlocation,
     yourplaceName,
     youraboutPlace,
-    yourprice,
-    yourguest,
-    yourbedroom,
-    yourbed,
-    yourbathrom,
   } = useLocalDataStore();
+
+  const [id, setid] = useState(0);
+
+  const useUplaodData = async (e) => {
+    e.preventDefault();
+    setid(id + 1);
+    try {
+      const docRef = await setDoc(doc(database, "Ads", `Ad${id}`), {
+        host: host,
+        location: location,
+        placeName: placeName,
+        price: price,
+        aboutPlace: aboutPlace,
+        placeView: placeView,
+        guest: guest,
+        bedroom: bedroom,
+        bed: bed,
+        bathrom: bathrom,
+        image: image,
+      });
+      console.log("data added");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   return (
     <div>
@@ -44,7 +76,7 @@ function Home4() {
       </h1>
       <div className="flex justify-center my-4  ">
         <form
-          action=""
+          onSubmit={useUplaodData}
           className=" w-72 md:w-auto border-2 rounded shadow-lg flex flex-col"
         >
           <div className="flex flex-col gap-3 p-3">
