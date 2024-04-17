@@ -15,7 +15,7 @@ function Home3() {
   }, [user]);
 
   const { placeView, yourplaceView } = useLocalDataStore();
-  console.log(placeView);
+
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">

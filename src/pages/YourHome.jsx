@@ -13,6 +13,15 @@ function YourHome() {
   const { user } = useCheckAuth();
   const { openLoginModal } = useSigninModal();
   const [placeView, setplaceView] = useState();
+  const [guest, setguest] = useState(0);
+  const [bedroom, setbedroom] = useState(0);
+  const [bed, setbed] = useState(0);
+  const [bathrom, setbathrom] = useState(0);
+  const [host, sethost] = useState("");
+  const [location, setlocation] = useState("");
+  const [placeName, setplaceName] = useState("");
+  const [price, setprice] = useState("");
+  const [aboutPlace, setaboutPlace] = useState("");
   // const [currentUser, setcurrentUser] = useState();
 
   const handleNextStep = () => {
@@ -32,9 +41,59 @@ function YourHome() {
   const yourplaceView = (e) => {
     setplaceView(e);
   };
+  const yourguest = (e) => {
+    setguest(e);
+  };
+  const yourbedroom = (e) => {
+    setbedroom(e);
+  };
+  const yourbed = (e) => {
+    setbed(e);
+  };
+  const yourbathrom = (e) => {
+    setbathrom(e);
+  };
+  const yourhost = (e) => {
+    sethost(e);
+  };
+  const yourlocation = (e) => {
+    setlocation(e);
+  };
+  const yourplaceName = (e) => {
+    setplaceName(e);
+  };
+  const youraboutPlace = (e) => {
+    setaboutPlace(e);
+  };
+  const yourprice = (e) => {
+    setprice(e);
+  };
 
   return (
-    <LocalDataStoreProvider value={{ yourplaceView, placeView }}>
+    <LocalDataStoreProvider
+      value={{
+        host,
+        location,
+        placeName,
+        price,
+        aboutPlace,
+        placeView,
+        guest,
+        bedroom,
+        bed,
+        bathrom,
+        yourhost,
+        yourlocation,
+        yourplaceView,
+        yourplaceName,
+        youraboutPlace,
+        yourprice,
+        yourguest,
+        yourbedroom,
+        yourbed,
+        yourbathrom,
+      }}
+    >
       {currentStep === 1 && <Home1 />}
 
       {currentStep === 2 && <Home2 />}
