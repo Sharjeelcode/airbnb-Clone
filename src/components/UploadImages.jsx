@@ -1,24 +1,39 @@
 import React, { useState } from "react";
-
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { storage } from "../Firebase/config";
 function UploadImages() {
   const [files, setFile] = useState([]);
   const [message, setMessage] = useState();
-  const handleFile = (e) => {
-    setMessage("");
-    let file = e.target.files;
+  const { image, yourimage } = useState();
+  const auth = getAuth();
+  // upload to firebase
 
-    for (let i = 0; i < file.length; i++) {
-      const fileType = file[i]["type"];
+  const handleFile = async (e) => {
+    setMessage("");
+    let uploadedFile = e.target.files;
+
+    for (let i = 0; i < uploadedFile.length; i++) {
+      const fileType = uploadedFile[i]["type"];
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
       if (validImageTypes.includes(fileType)) {
-        setFile([...files, file[i]]);
-        console.log(URL.createObjectURL(files[1]));
+        setFile([...files, uploadedFile[i]]);
+        try {
+          const imageRef = ref(
+            storage,
+            `${auth.currentUser.email}/${uploadedFile[0].name}`
+          );
+          await uploadBytes(imageRef, uploadedFile[i]);
+          const url = await getDownloadURL(imageRef);
+          console.log(url);
+        } catch (error) {
+          console.log(error.message);
+        }
       } else {
         setMessage("only images accepted");
       }
     }
   };
-
   const removeImage = (i) => {
     setFile(files.filter((x) => x.name !== i));
   };
