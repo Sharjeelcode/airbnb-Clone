@@ -7,6 +7,7 @@ import Home3 from "../components/YourHomeComponents/Home3";
 import Home4 from "../components/YourHomeComponents/Home4";
 import useSigninModal from "../Hooks/signinModal";
 import { LocalDataStoreProvider } from "../Hooks/localDataStore";
+import useFireStoreData from "../Hooks/fireStoreData";
 
 function YourHome() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -73,8 +74,6 @@ function YourHome() {
     setimage([...image, e]);
   };
 
-  console.log(image);
-  console.log(host);
   return (
     <LocalDataStoreProvider
       value={{

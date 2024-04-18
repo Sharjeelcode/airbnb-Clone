@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function Catagorybar() {
   return (
     <Carousel
-      className="h-20 "
+      className="h-20 hidden"
       prevArrow={({ handlePrev }) => (
         <IconButton
           variant="text"

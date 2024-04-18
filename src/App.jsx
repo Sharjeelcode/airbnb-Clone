@@ -13,7 +13,6 @@ function App() {
   const [menuBtn, setMenuBtn] = useState("hidden");
   const [SignUpmodal, setSignUpmodal] = useState();
   const [LoginModal, setSignLoginModal] = useState();
-  const [adsData, setadsData] = useState([]);
 
   // render footer according to pageLocation
   const location = useLocation();
@@ -76,10 +75,11 @@ function App() {
 
   //ads data getting from firestore and push to app
 
-  const pushadsData = (e) => {
-    setadsData((prevAdsData) => [...prevAdsData, e]);
-  };
   // console.log(adsData);
+  const [adsData, setadsData] = useState([]);
+  const pushadsData = (e) => {
+    setadsData(e);
+  };
 
   return (
     <>
