@@ -5,6 +5,7 @@ import useFireStoreData, {
   FireStoreDataProvider,
 } from "../Hooks/fireStoreData";
 import AdsCard from "../components/AdsCard";
+
 function Landingpage() {
   const { adsData, pushadsData } = useFireStoreData();
   const func = async () => {
@@ -13,8 +14,8 @@ function Landingpage() {
       const data = [];
       querySnapshot.forEach((doc) => {
         data.unshift(doc.data());
+        console.log(doc.id);
       });
-      // setadsData(data);
       pushadsData(data);
     } catch (error) {
       console.log(error);
@@ -25,17 +26,19 @@ function Landingpage() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 justify-items-center my-4">
+    <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-4">
       {adsData.map((ads, id) => {
         return (
-          <AdsCard
-            key={id}
-            price={ads.price}
-            location={ads.location}
-            placeview={ads.placeView}
-            image={ads.image}
-            host={ads.host}
-          />
+          <>
+            <AdsCard
+              key={id}
+              price={ads.price}
+              location={ads.location}
+              placeview={ads.placeView}
+              image={ads.image}
+              host={ads.host}
+            />
+          </>
         );
       })}
       {/* <button onClick={func}>getdata</button> */}

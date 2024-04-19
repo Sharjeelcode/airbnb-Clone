@@ -11,12 +11,14 @@ import {
 } from "react-router-dom";
 import Landingpage from "./pages/Landingpage.jsx";
 import YourHome from "./pages/YourHome.jsx";
+import AdsDetail from "./pages/AdsDetail.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
       <Route path="/" element={<Landingpage />} />
       <Route path="/yourhome" element={<YourHome />} />
+      <Route path="/adsdetail" element={<AdsDetail />} />
     </Route>
   )
 );

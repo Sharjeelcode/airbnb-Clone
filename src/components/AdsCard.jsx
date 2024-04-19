@@ -1,11 +1,17 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
+
+import { useNavigate } from "react-router-dom";
 function AdsCard(prop) {
   const { price, location, placeview, image, host } = prop;
 
   const review = Math.round(Math.random() * 100 + 1);
+  const navigate = useNavigate();
 
+  const handleNavigate = () => {
+    navigate("/adsdetail");
+  };
   return (
-    <div className="w-64 h-96">
+    <div className="w-64 h-96 cursor-pointer">
       <Carousel
         className="rounded-xl w-64 h-60"
         prevArrow={({ handlePrev }) => (
@@ -59,10 +65,12 @@ function AdsCard(prop) {
       >
         {/* <Carousel className="rounded-xl w-64 h-64"> */}
         {image.map((url) => {
-          return <img src={url} className="w-64 h-60" />;
+          return (
+            <img src={url} className="w-64 h-60" onClick={handleNavigate} />
+          );
         })}
       </Carousel>
-      <div className="py-2 px-1">
+      <div className="py-2 px-1 " onClick={handleNavigate}>
         <div className="flex justify-between">
           <h1 className="font-semibold text-[14px] truncate w-32">
             {location}
