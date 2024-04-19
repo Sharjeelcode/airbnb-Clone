@@ -53,12 +53,12 @@ function Signup() {
   };
   return (
     <div>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto ">
         <div
-          className={`${SignUpmodal} flex overflow-x-hidden  overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center`}
+          className={`${SignUpmodal} flex backdrop-blur-sm overflow-x-hidden  overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center`}
         >
           <div className="relative w-full   max-w-md px-4 h-full md:h-auto">
-            <div className="bg-white opacity-100 rounded-lg shadow relative dark:bg-gray-700">
+            <div className="bg-white  rounded-lg shadow relative dark:bg-gray-700">
               <div className="flex justify-end p-2">
                 <button
                   type="button"
@@ -75,7 +75,7 @@ function Signup() {
                   </svg>
                 </button>
               </div>
-              <form className="space-y-6 px-6 pb-2" action="#">
+              <form className="space-y-6 px-6 pb-2" onSubmit={HandleSignUp}>
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Sign up to Airbnb
                 </h3>
@@ -91,7 +91,7 @@ function Signup() {
                     name="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Enter your Name"
-                    required=""
+                    required
                     value={Name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -108,7 +108,7 @@ function Signup() {
                     name="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name@company.com"
-                    required=""
+                    required
                     value={Email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -126,7 +126,7 @@ function Signup() {
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required=""
+                    required
                     value={Password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -135,7 +135,6 @@ function Signup() {
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  onClick={HandleSignUp}
                 >
                   Login to your account
                 </button>
