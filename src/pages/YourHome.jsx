@@ -122,7 +122,7 @@ function YourHome() {
 
       {/* buttons for change state of components */}
       {currentStep === 1 && (
-        <div className="flex justify-end sticky right-0 ">
+        <div className="absolute  flex justify-end  right-0 bottom-4 ">
           <button
             onClick={handleNextStep}
             className="mr-8 p-3  rounded-lg text-white bg-[#FE375C]"
@@ -132,7 +132,11 @@ function YourHome() {
         </div>
       )}
       {currentStep !== 1 && (
-        <div className="w-full  border-t-2 py-4 bg-white flex  justify-between px-6 sticky bottom-0">
+        <div
+          className={`w-full  border-t-2 py-4 bg-white flex  justify-between px-6  ${
+            currentStep == 2 ? "absolute " : "sticky"
+          }  bottom-0`}
+        >
           <button onClick={handlePrevStep} className="underline">
             back
           </button>
