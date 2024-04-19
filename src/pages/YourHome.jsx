@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useCheckAuth, { CheckAuthProvider } from "../Hooks/checkAuth";
 import Home1 from "../components/YourHomeComponents/Home1";
@@ -14,16 +14,17 @@ function YourHome() {
   const { user } = useCheckAuth();
   const { openLoginModal } = useSigninModal();
   const [placeView, setplaceView] = useState();
-  const [guest, setguest] = useState(0);
-  const [bedroom, setbedroom] = useState(0);
-  const [bed, setbed] = useState(0);
-  const [bathrom, setbathrom] = useState(0);
+  const [guest, setguest] = useState("");
+  const [bedroom, setbedroom] = useState("");
+  const [bed, setbed] = useState("");
+  const [bathrom, setbathrom] = useState("");
   const [host, sethost] = useState("");
   const [location, setlocation] = useState("");
   const [placeName, setplaceName] = useState("");
-  const [price, setprice] = useState(0);
+  const [price, setprice] = useState("");
   const [aboutPlace, setaboutPlace] = useState("");
   const [image, setimage] = useState([]);
+  const [fields, setfields] = useState(true);
   // const [currentUser, setcurrentUser] = useState();
 
   const handleNextStep = () => {
@@ -71,8 +72,17 @@ function YourHome() {
     setprice(e);
   };
   const yourimage = (e) => {
-    setimage([...image, e]);
+    setimage((prev) => [...prev, e]);
   };
+
+  const yourfields = (e) => {
+    setfields(e);
+  };
+  const [next, setnext] = useState(true);
+
+  useEffect(() => {
+    !placeView ? setnext(true) : setnext(false);
+  }, [placeView]);
 
   return (
     <LocalDataStoreProvider
@@ -88,6 +98,7 @@ function YourHome() {
         bed,
         bathrom,
         image,
+        fields,
         yourhost,
         yourlocation,
         yourplaceView,
@@ -99,6 +110,7 @@ function YourHome() {
         yourbed,
         yourbathrom,
         yourimage,
+        yourfields,
       }}
     >
       {currentStep === 1 && <Home1 />}
@@ -124,13 +136,26 @@ function YourHome() {
           <button onClick={handlePrevStep} className="underline">
             back
           </button>
-          {currentStep < 4 && (
+          {currentStep === 2 && (
             <button
               onClick={handleNextStep}
-              className="px-4 py-2  rounded-lg text-white bg-gray-900"
+              className="px-4 py-2   rounded-lg text-white bg-gray-900"
             >
               Next
             </button>
+          )}
+          {currentStep > 2 && currentStep < 4 ? (
+            <button
+              onClick={handleNextStep}
+              className={`${next} px-4 py-2 ${
+                !next ? "bg-gray-900" : "cursor-not-allowed bg-gray-400"
+              }   rounded-lg text-white `}
+              disabled={next}
+            >
+              Next
+            </button>
+          ) : (
+            ""
           )}
         </div>
       )}

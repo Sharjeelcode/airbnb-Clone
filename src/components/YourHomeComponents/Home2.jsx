@@ -13,7 +13,7 @@ function Home2() {
   }, [user]);
 
   return (
-    <div className="flex justify-around my-5 px-5">
+    <div className="flex flex-wrap md:flex-nowrap justify-around my-5 px-5">
       <div className="flex flex-col  justify-center">
         <h1 className="text-lg">Step 1</h1>
         <h1 className="text-4xl font-semibold py-3 text-gray-900">

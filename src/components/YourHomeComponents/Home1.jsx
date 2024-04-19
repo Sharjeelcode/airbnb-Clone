@@ -5,9 +5,9 @@ import home3 from "../../assets/home3.webp";
 import useCheckAuth from "../../Hooks/checkAuth";
 function Home1() {
   return (
-    <div className="flex justify-around my-5 px-5">
+    <div className="flex flex-wrap md:flex-nowrap justify-around my-5 px-5">
       <div className="flex items-center">
-        <h1 className="text-6xl font-medium text-gray-900 ">
+        <h1 className="text-2xl md:text-6xl font-medium text-gray-900 mb-4 md:mb-0">
           It's easy to get <br />
           started on Airbnb
         </h1>

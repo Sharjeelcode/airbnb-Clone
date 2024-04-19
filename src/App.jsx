@@ -6,7 +6,8 @@ import { CheckAuthProvider } from "./Hooks/checkAuth";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { SigninModalProvider } from "./Hooks/signinModal";
 import { FireStoreDataProvider } from "./Hooks/fireStoreData";
-
+// import "rsuite/styles/index.less";
+import { CustomProvider } from "rsuite";
 function App() {
   const [footer, setfooter] = useState(false);
   const [user, setuser] = useState(null);
@@ -83,26 +84,28 @@ function App() {
 
   return (
     <>
-      <SigninModalProvider
-        value={{
-          SignUpmodal,
-          LoginModal,
-          menuBtn,
-          openSignUpModal,
-          closeSignUpModal,
-          openLoginModal,
-          closeLoginModal,
-          toggleMenubtn,
-        }}
-      >
-        <CheckAuthProvider value={{ user, acessUser, denieUser }}>
-          <FireStoreDataProvider value={{ adsData, pushadsData }}>
-            <Header />
-            <Outlet />
-            {footer && <Footer />}
-          </FireStoreDataProvider>
-        </CheckAuthProvider>
-      </SigninModalProvider>
+      <CustomProvider>
+        <SigninModalProvider
+          value={{
+            SignUpmodal,
+            LoginModal,
+            menuBtn,
+            openSignUpModal,
+            closeSignUpModal,
+            openLoginModal,
+            closeLoginModal,
+            toggleMenubtn,
+          }}
+        >
+          <CheckAuthProvider value={{ user, acessUser, denieUser }}>
+            <FireStoreDataProvider value={{ adsData, pushadsData }}>
+              <Header />
+              <Outlet />
+              {footer && <Footer />}
+            </FireStoreDataProvider>
+          </CheckAuthProvider>
+        </SigninModalProvider>
+      </CustomProvider>
     </>
   );
 }

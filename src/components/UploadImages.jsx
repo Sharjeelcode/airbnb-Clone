@@ -3,17 +3,20 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { storage } from "../Firebase/config";
 import useLocalDataStore from "../Hooks/localDataStore";
+import { Spinner } from "@material-tailwind/react";
 function UploadImages() {
   const [files, setFile] = useState([]);
   const [message, setMessage] = useState();
-  const { yourimage } = useLocalDataStore();
+  const { yourimage, yourfields } = useLocalDataStore();
+  const [upload, setupload] = useState(false);
   const auth = getAuth();
   // upload to firebase
 
   const handleFile = async (e) => {
     setMessage("");
     let uploadedFile = e.target.files;
-
+    yourfields(true);
+    setupload(true);
     for (let i = 0; i < uploadedFile.length; i++) {
       const fileType = uploadedFile[i]["type"];
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
@@ -27,6 +30,9 @@ function UploadImages() {
           await uploadBytes(imageRef, uploadedFile[i]);
           const url = await getDownloadURL(imageRef);
           yourimage(url);
+          setupload(false);
+          console.log("UPLOADED");
+          yourfields(false);
         } catch (error) {
           console.log(error.message);
         }
@@ -42,7 +48,7 @@ function UploadImages() {
   return (
     <>
       <div class="flex justify-center items-center px-3 pb-4">
-        <div class="rounded-lg  shadow-md bg-gray-50 w-1/2  md:w-full">
+        <div class="rounded-lg  shadow-md bg-gray-50 w-full">
           <div class="m-4">
             <span className="flex justify-center items-center text-[12px] mb-1 text-red-500">
               {message}
@@ -75,7 +81,7 @@ function UploadImages() {
                 />
               </label>
             </div>
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="grid grid-cols-3 justify-items-center gap-2 mt-2">
               {files.map((file, key) => {
                 return (
                   <div key={key} className="overflow-hidden relative">
@@ -94,6 +100,12 @@ function UploadImages() {
               })}
             </div>
           </div>
+          {upload && (
+            <div className="flex justify-center mb-2">
+              <span className="px-4">Uploading</span>
+              <Spinner />
+            </div>
+          )}
         </div>
       </div>
     </>

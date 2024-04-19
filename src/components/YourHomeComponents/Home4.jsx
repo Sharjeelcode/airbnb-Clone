@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Input, Textarea, Button } from "@material-tailwind/react";
+import { Input, Textarea, Spinner } from "@material-tailwind/react";
 import UploadImages from "../UploadImages";
 import useCheckAuth from "../../Hooks/checkAuth";
 import useLocalDataStore from "../../Hooks/localDataStore";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { database } from "../../Firebase/config";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Home4() {
   const [Guest, setGuest] = useState(0);
   const [Bedroom, setBedroom] = useState(0);
   const [Bed, setBed] = useState(0);
   const [privateBathroom, setprivateBathroom] = useState(0);
-
+  const [publish, setpublish] = useState("hidden");
+  const navigate = useNavigate();
   const { user } = useCheckAuth();
   // checks current user authentication
   useEffect(() => {
@@ -33,6 +35,7 @@ function Home4() {
     bed,
     bathrom,
     image,
+    fields,
     yourhost,
     yourguest,
     yourbathrom,
@@ -42,15 +45,14 @@ function Home4() {
     yourlocation,
     yourplaceName,
     youraboutPlace,
+    yourfields,
   } = useLocalDataStore();
-
-  const [id, setid] = useState(0);
 
   const useUplaodData = async (e) => {
     e.preventDefault();
-    setid(id + 1);
+    setpublish("block");
     try {
-      const docRef = await setDoc(doc(database, "Ads", `Ad${id}`), {
+      const docRef = await addDoc(collection(database, "Ads"), {
         host: host,
         location: location,
         placeName: placeName,
@@ -63,7 +65,9 @@ function Home4() {
         bathrom: bathrom,
         image: image,
       });
+      setpublish("hidden");
       console.log("data added");
+      navigate("/");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -84,7 +88,7 @@ function Home4() {
               type="text"
               color="black"
               label="Hosted by"
-              required
+              required={host != "" ? false : true}
               value={host}
               onChange={(e) => yourhost(e.target.value)}
             />
@@ -92,7 +96,7 @@ function Home4() {
               type="text"
               color="black"
               label="Location"
-              required
+              required={location != "" ? false : true}
               value={location}
               onChange={(e) => yourlocation(e.target.value)}
             />
@@ -100,7 +104,7 @@ function Home4() {
               type="text"
               color="black"
               label="Place Name"
-              required
+              required={placeName != "" ? false : true}
               value={placeName}
               onChange={(e) => yourplaceName(e.target.value)}
             />
@@ -108,14 +112,14 @@ function Home4() {
               type="number"
               color="black"
               label="Price"
-              required
+              required={price != "" ? false : true}
               value={price}
               onChange={(e) => yourprice(e.target.value)}
             />
             <Textarea
               size="lg"
               label="About this space "
-              required
+              required={aboutPlace != "" ? false : true}
               value={aboutPlace}
               onChange={(e) => youraboutPlace(e.target.value)}
             />
@@ -123,7 +127,7 @@ function Home4() {
           <div>
             <div className="flex items-center justify-between gap-4 p-2">
               <label
-                for="bedrooms-input"
+                for="Guest"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Guests
@@ -154,7 +158,7 @@ function Home4() {
                 </button>
                 <input
                   type="text"
-                  id="bedrooms-input"
+                  id="Guest"
                   data-input-counter
                   data-input-counter-min="1"
                   data-input-counter-max="5"
@@ -267,7 +271,7 @@ function Home4() {
             </div>
             <div className="flex items-center justify-between gap-4 p-2">
               <label
-                for="bedrooms-input"
+                for="Bed"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Beds
@@ -298,7 +302,7 @@ function Home4() {
                 </button>
                 <input
                   type="text"
-                  id="bedrooms-input"
+                  id="Bed"
                   data-input-counter
                   data-input-counter-min="1"
                   data-input-counter-max="5"
@@ -339,7 +343,7 @@ function Home4() {
             </div>
             <div className="flex items-center justify-between gap-4 p-2">
               <label
-                for="bedrooms-input"
+                for="Bathrooms"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Private Bathrooms
@@ -374,7 +378,7 @@ function Home4() {
                 </button>
                 <input
                   type="text"
-                  id="bedrooms-input"
+                  id="Bathrooms"
                   data-input-counter
                   data-input-counter-min="1"
                   data-input-counter-max="5"
@@ -415,12 +419,28 @@ function Home4() {
             </div>
           </div>
           <UploadImages />
+          {!fields ? (
+            ""
+          ) : (
+            <p className="text-center text-red-500 text-sm">
+              Upload some images
+            </p>
+          )}
+          <div className={`${publish}  flex justify-center my-1`}>
+            <span className="px-4">Publishing </span> <Spinner />
+          </div>
+
           <div className="flex  justify-center rounded py-2">
-            <input
+            <button
               type="submit"
-              value={"Publish your home"}
-              className="bg-[#FE375C] text-white p-3 rounded"
-            />
+              disabled={fields}
+              className={`
+              ${fields}${
+                !fields ? "" : " bg-gray-400 cursor-wait"
+              }   text-white p-3 rounded bg-[#FE375C] cursor-pointer`}
+            >
+              Publish your home
+            </button>
           </div>
         </form>
       </div>
