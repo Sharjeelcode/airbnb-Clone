@@ -12,7 +12,7 @@ function Landingpage() {
       const querySnapshot = await getDocs(collection(database, "Ads"));
       const data = [];
       querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+        data.unshift(doc.data());
       });
       // setadsData(data);
       pushadsData(data);
