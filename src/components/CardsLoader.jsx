@@ -25,31 +25,40 @@ function CardsLoader() {
         </svg>
       </div>
       <div className="w-64 ">
+        <div className="flex justify-between">
+          <div
+            as="div"
+            variant="paragraph"
+            className="mb-2 h-3 w-24 mt-4 rounded-full bg-gray-300"
+          >
+            &nbsp;
+          </div>
+          <div
+            as="div"
+            variant="paragraph"
+            className="mb-2 h-3 w-12 mt-4 rounded-full bg-gray-300"
+          >
+            &nbsp;
+          </div>
+        </div>
         <div
           as="div"
           variant="paragraph"
-          className="mb-2 h-2 w-full mt-4 rounded-full bg-gray-300"
+          className="mb-2 h-2 w-40  rounded-full bg-gray-300"
         >
           &nbsp;
         </div>
         <div
           as="div"
           variant="paragraph"
-          className="mb-2 h-2 w-full rounded-full bg-gray-300"
+          className="mb-2 h-2 w-36 rounded-full bg-gray-300"
         >
           &nbsp;
         </div>
         <div
           as="div"
           variant="paragraph"
-          className="mb-2 h-2 w-full rounded-full bg-gray-300"
-        >
-          &nbsp;
-        </div>
-        <div
-          as="div"
-          variant="paragraph"
-          className="mb-2 h-2 w-full rounded-full bg-gray-300"
+          className="mb-2 h-2 w-32 rounded-full bg-gray-300"
         >
           &nbsp;
         </div>
