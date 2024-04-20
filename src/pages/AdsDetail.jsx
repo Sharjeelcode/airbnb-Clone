@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Placeoffer from "../components/Placeoffer";
+import AdsDetailCraosal from "../components/AdsDetailCraosal";
+
 function AdsDetail(prop) {
   return (
     <>
-      <div className="px-36">
-        <h1 className="mt-4 text-xl font-semibold ">
+      <div className="px-5 md:px-36">
+        <h1 className="mt-4 text-lg md:text-xl font-semibold ">
           Sooty's Hideout ~ Beat the Blues Room
         </h1>
-
+        {/* mobile devices craosal */}
+        <AdsDetailCraosal />
+        {/* medium and large devices image gallery */}
         <div className="hidden md:flex  my-3 justify-center">
           <div className="mr-2">
             <img
@@ -39,9 +43,8 @@ function AdsDetail(prop) {
             />
           </div>
         </div>
-
-        <div className="grid grid-cols-2 justify-between">
-          <div className="w-[655px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-between">
+          <div className="md:w-[655px]">
             <h1 className="text-lg font-medium my-1">
               Room in Shangarh, India
             </h1>

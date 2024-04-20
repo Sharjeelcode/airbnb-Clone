@@ -5,9 +5,16 @@ import useFireStoreData, {
   FireStoreDataProvider,
 } from "../Hooks/fireStoreData";
 import AdsCard from "../components/AdsCard";
+import CardsLoader from "../components/CardsLoader";
 
 function Landingpage() {
   const { adsData, pushadsData } = useFireStoreData();
+  const [loader, setloader] = useState(true);
+
+  useEffect(() => {
+    adsData.length > 0 ? setloader(false) : setloader(true);
+  }, [adsData]);
+
   const func = async () => {
     try {
       const querySnapshot = await getDocs(collection(database, "Ads"));
@@ -41,7 +48,19 @@ function Landingpage() {
           </>
         );
       })}
-      {/* <button onClick={func}>getdata</button> */}
+      {loader && (
+        <>
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+          <CardsLoader />
+        </>
+      )}
+      ;{/* <button onClick={func}>getdata</button> */}
     </div>
   );
 }

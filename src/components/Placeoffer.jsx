@@ -2,7 +2,7 @@ import React from "react";
 
 function Placeoffer() {
   return (
-    <div className="grid grid-cols-2 ">
+    <div className="grid md:grid-cols-2 ">
       <div className="flex gap-2 mb-4  ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
