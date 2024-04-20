@@ -11,9 +11,9 @@ function Landingpage() {
   const { adsData, pushadsData } = useFireStoreData();
   const [loader, setloader] = useState(true);
 
-  // useEffect(() => {
-  //   adsData.length > 0 ? setloader(false) : setloader(true);
-  // }, [adsData]);
+  useEffect(() => {
+    adsData.length > 0 ? setloader(false) : setloader(true);
+  }, [adsData]);
 
   const func = async () => {
     try {
