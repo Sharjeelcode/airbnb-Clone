@@ -1,5 +1,5 @@
-import React from "react";
 import { Carousel, IconButton } from "@material-tailwind/react";
+
 function AdsDetailCraosal() {
   return (
     <Carousel

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Placeoffer from "../components/Placeoffer";
 import AdsDetailCraosal from "../components/AdsDetailCraosal";
 import useFireStoreData from "../Hooks/fireStoreData";
@@ -6,10 +6,19 @@ import detail1 from "../assets/detail1.jpg";
 import detail3 from "../assets/detail3.jpeg";
 import detail4 from "../assets/detail4.jpg";
 import detail5 from "../assets/detail5.jpeg";
-
+import { getAuth } from "firebase/auth";
+import randomProfile from "../assets/profile pic.webp";
 function AdsDetail() {
   const { adsData, adsDetail } = useFireStoreData();
-
+  const [profilePic, setprofilePic] = useState("");
+  const auth = getAuth();
+  useEffect(() => {
+    if (auth.currentUser.photoURL !== null) {
+      setprofilePic(auth.currentUser.photoURL);
+    } else {
+      setprofilePic(randomProfile);
+    }
+  }, [auth.currentUser.photoURL]);
   return (
     <>
       <div className="px-5 md:px-36">
@@ -74,7 +83,8 @@ function AdsDetail() {
         <div className="grid grid-cols-1 md:grid-cols-2 justify-between">
           <div className="md:w-[655px]">
             <h1 className="text-lg font-medium my-1">
-              Room in {adsData[adsDetail].location}, Pakistan
+              Room in {adsData[adsDetail].location} {adsData[adsDetail].city},
+              Pakistan
             </h1>
             <div className="text-sm">
               <span>{adsData[adsDetail].bed} bed</span>{" "}
@@ -86,11 +96,7 @@ function AdsDetail() {
             <hr className="my-4 " />
             <div className="flex gap-4">
               <div>
-                <img
-                  src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
-                  alt=""
-                  className="w-10 rounded-full"
-                />
+                <img src={profilePic} alt="" className="w-10 rounded-full" />
               </div>
               <div>
                 <h1 className="font-medium">

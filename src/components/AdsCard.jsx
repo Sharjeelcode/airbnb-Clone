@@ -3,7 +3,7 @@ import { Carousel, IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import useFireStoreData from "../Hooks/fireStoreData";
 function AdsCard(prop) {
-  const { price, location, placeview, image, host, id } = prop;
+  const { price, location, placeview, image, host, id, city } = prop;
   // console.log(id);
   const review = Math.round(Math.random() * 100 + 1);
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ function AdsCard(prop) {
       <div className="py-2 px-1 " onClick={handleNavigate}>
         <div className="flex justify-between">
           <h1 className="font-semibold text-[14px] truncate w-32">
-            {location}
+            {location} ,{city}
           </h1>
           <h1 className="w-16">★ 4.{review}</h1>
         </div>

@@ -20,7 +20,7 @@ function Landingpage() {
       const querySnapshot = await getDocs(collection(database, "Ads"));
       const data = [];
       querySnapshot.forEach((doc) => {
-        data.unshift(doc.data());
+        data.push(doc.data());
       });
       pushadsData(data);
     } catch (error) {
@@ -43,6 +43,7 @@ function Landingpage() {
               placeview={ads.placeView}
               image={ads.image}
               host={ads.host}
+              city={ads.city}
               id={id}
             />
           </>
@@ -60,7 +61,6 @@ function Landingpage() {
           <CardsLoader />
         </>
       )}
-      ;{/* <button onClick={func}>getdata</button> */}
     </div>
   );
 }
