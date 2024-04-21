@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import Placeoffer from "../components/Placeoffer";
 import AdsDetailCraosal from "../components/AdsDetailCraosal";
+import useFireStoreData from "../Hooks/fireStoreData";
+import detail1 from "../assets/detail1.jpg";
+import detail3 from "../assets/detail3.jpeg";
+import detail4 from "../assets/detail4.jpg";
+import detail5 from "../assets/detail5.jpeg";
 
-function AdsDetail(prop) {
+function AdsDetail() {
+  const { adsData, adsDetail } = useFireStoreData();
+
   return (
     <>
       <div className="px-5 md:px-36">
         <h1 className="mt-4 text-lg md:text-xl font-semibold ">
-          Sooty's Hideout ~ Beat the Blues Room
+          {/* Sooty's Hideout ~ Beat the Blues Room */}
+          {adsData[adsDetail].placeName.toUpperCase()}
         </h1>
         {/* mobile devices craosal */}
         <AdsDetailCraosal />
@@ -15,29 +23,49 @@ function AdsDetail(prop) {
         <div className="hidden md:flex  my-3 justify-center">
           <div className="mr-2">
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
+              src={
+                adsData[adsDetail].image[0]
+                  ? adsData[adsDetail].image[0]
+                  : detail5
+              }
               alt=""
               className="w-full md:w-[560px] h-[310px] rounded-l-lg"
             />
           </div>
           <div className="grid grid-cols-2 gap-x-2 gap-y-1">
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
+              src={
+                adsData[adsDetail].image[1]
+                  ? adsData[adsDetail].image[1]
+                  : detail4
+              }
               alt=""
               className="w-[272px] h-[150px]"
             />
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
+              src={
+                adsData[adsDetail].image[2]
+                  ? adsData[adsDetail].image[2]
+                  : detail3
+              }
               alt=""
               className="w-[272px] h-[150px] rounded-r-lg"
             />
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
+              src={
+                adsData[adsDetail].image[3]
+                  ? adsData[adsDetail].image[3]
+                  : detail1
+              }
               alt=""
               className="w-[272px] h-[150px]"
             />
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-614375154474735110/original/7e7f4c4a-c496-4844-bd02-44e276b41718.jpeg?im_w=960"
+              src={
+                adsData[adsDetail].image[4]
+                  ? adsData[adsDetail].image[4]
+                  : detail5
+              }
               alt=""
               className="w-[272px] h-[150px] rounded-r-lg"
             />
@@ -46,12 +74,14 @@ function AdsDetail(prop) {
         <div className="grid grid-cols-1 md:grid-cols-2 justify-between">
           <div className="md:w-[655px]">
             <h1 className="text-lg font-medium my-1">
-              Room in Shangarh, India
+              Room in {adsData[adsDetail].location}, Pakistan
             </h1>
             <div className="text-sm">
-              <span>1 bed</span> <span className="text-start">.</span>{" "}
-              <span>1 Bedroom</span> <span className="text-start">. </span>
-              <span>1 Bathroom</span>
+              <span>{adsData[adsDetail].bed} bed</span>{" "}
+              <span className="text-start">.</span>{" "}
+              <span>{adsData[adsDetail].bedroom} Bedroom</span>{" "}
+              <span className="text-start">. </span>
+              <span>{adsData[adsDetail].bathrom} Bathroom</span>
             </div>
             <hr className="my-4 " />
             <div className="flex gap-4">
@@ -63,14 +93,16 @@ function AdsDetail(prop) {
                 />
               </div>
               <div>
-                <h1 className="font-medium">Hosted by Shagun</h1>
+                <h1 className="font-medium">
+                  Hosted by {adsData[adsDetail].host}
+                </h1>
                 <p className="text-sm">2 years hosting</p>
               </div>
             </div>
             <hr className="my-4 " />
             <div>
               <h1 className="text-xl font-medium py-4">About this place</h1>
-              <p>sdjgh</p>
+              <p>{adsData[adsDetail].aboutPlace}</p>
             </div>
             <hr className="my-4 " />
             <div className="">

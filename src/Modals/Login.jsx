@@ -41,9 +41,9 @@ function Login() {
     <div>
       <div className="  max-w-2xl mx-auto">
         <div
-          className={`${LoginModal}  flex overflow-x-hidden  backdrop-blur-sm  overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center`}
+          className={`${LoginModal}  flex overflow-x-hidden  backdrop-blur-sm  overflow-y-auto fixed h-modal h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center`}
         >
-          <div className="relative w-full  max-w-md px-4 h-full md:h-auto">
+          <div className="relative w-full  max-w-md px-4  md:h-auto">
             <div className="bg-white rounded-lg shadow relative dark:bg-gray-700">
               <div className="flex justify-end p-2">
                 <button

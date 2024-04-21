@@ -14,6 +14,7 @@ export const localDataStore = createContext({
   bathrom: 0,
   image: [],
   fields: true,
+  city: "Karachi",
   yourhost: () => {},
   yourlocation: () => {},
   yourplaceName: () => {},
@@ -26,6 +27,7 @@ export const localDataStore = createContext({
   yourbathrom: () => {},
   yourimage: () => {},
   yourfields: () => {},
+  yourcity: () => {},
 });
 
 export const LocalDataStoreProvider = localDataStore.Provider;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import useCheckAuth from "../Hooks/checkAuth";
 import randomProfile from "../assets/profile pic.webp";
@@ -13,7 +13,7 @@ function UserDropDown() {
   };
 
   const { denieUser } = useCheckAuth();
-
+  const location = useLocation();
   const auth = getAuth();
   useEffect(() => {
     if (auth.currentUser.photoURL !== null) {
@@ -42,15 +42,13 @@ function UserDropDown() {
               <NavLink className="text-gray-700 text-left px-4 py-2 text-sm hover:bg-gray-100">
                 Messages
               </NavLink>
-              <NavLink className="text-gray-700 text-left px-4 py-2 text-sm hover:bg-gray-100">
-                Trips
-              </NavLink>
               <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
                 WishList
               </NavLink>
               <hr />
               <NavLink
                 to={"/yourhome"}
+                onClick={() => setMenuBtn("hidden")}
                 className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
               >
                 Airbnb your home
@@ -59,9 +57,7 @@ function UserDropDown() {
                 Accounts
               </NavLink>
               <hr />
-              <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
-                Help Center
-              </NavLink>
+
               <button
                 onClick={denieUser}
                 className="text-gray-700 text-left px-4 py-2 text-sm hover:bg-gray-100"

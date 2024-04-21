@@ -21,7 +21,6 @@ function Landingpage() {
       const data = [];
       querySnapshot.forEach((doc) => {
         data.unshift(doc.data());
-        console.log(doc.id);
       });
       pushadsData(data);
     } catch (error) {
@@ -44,6 +43,7 @@ function Landingpage() {
               placeview={ads.placeView}
               image={ads.image}
               host={ads.host}
+              id={id}
             />
           </>
         );

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Input, Textarea, Spinner } from "@material-tailwind/react";
+import {
+  Input,
+  Textarea,
+  Spinner,
+  Select,
+  Option,
+} from "@material-tailwind/react";
 import UploadImages from "../UploadImages";
 import useCheckAuth from "../../Hooks/checkAuth";
 import useLocalDataStore from "../../Hooks/localDataStore";
@@ -36,6 +42,7 @@ function Home4() {
     bathrom,
     image,
     fields,
+    city,
     yourhost,
     yourguest,
     yourbathrom,
@@ -45,6 +52,7 @@ function Home4() {
     yourlocation,
     yourplaceName,
     youraboutPlace,
+    yourcity,
     yourfields,
   } = useLocalDataStore();
 
@@ -64,6 +72,7 @@ function Home4() {
         bed: bed,
         bathrom: bathrom,
         image: image,
+        city: city,
       });
       setpublish("hidden");
       console.log("data added");
@@ -72,7 +81,7 @@ function Home4() {
       console.error("Error adding document: ", e);
     }
   };
-
+  console.log(city);
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">
@@ -92,14 +101,7 @@ function Home4() {
               value={host}
               onChange={(e) => yourhost(e.target.value)}
             />
-            <Input
-              type="text"
-              color="black"
-              label="Location"
-              required={location != "" ? false : true}
-              value={location}
-              onChange={(e) => yourlocation(e.target.value)}
-            />
+
             <Input
               type="text"
               color="black"
@@ -107,6 +109,25 @@ function Home4() {
               required={placeName != "" ? false : true}
               value={placeName}
               onChange={(e) => yourplaceName(e.target.value)}
+            />
+            <Select
+              label="Select City"
+              value={city}
+              onChange={(e) => yourcity(e.target.value)}
+            >
+              <Option value="Karachi">Karachi</Option>
+              <Option value="Lahore">Lahore</Option>
+              <Option value="Islamabad">Islamabad</Option>
+              <Option value="Quetta">Quetta</Option>
+              <Option value="Rawalpindi">Rawalpindi</Option>
+            </Select>
+            <Input
+              type="text"
+              color="black"
+              label="Location"
+              required={location != "" ? false : true}
+              value={location}
+              onChange={(e) => yourlocation(e.target.value)}
             />
             <Input
               type="number"

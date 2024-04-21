@@ -3,6 +3,7 @@ import profilepic from "../assets/profile pic.webp";
 import useSigninModal from "../Hooks/signinModal";
 import Signup from "../Modals/Signup";
 import Login from "../Modals/Login";
+import { NavLink } from "react-router-dom";
 
 function GuestDropDown() {
   const {
@@ -44,18 +45,13 @@ function GuestDropDown() {
                 Sign up
               </button>
               <hr />
-              <a
-                href="#"
+              <NavLink
+                to={"/yourhome"}
+                onClick={toggleMenubtn}
                 className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
               >
                 Airbnb your home
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
-              >
-                Help center
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

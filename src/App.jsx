@@ -76,10 +76,15 @@ function App() {
 
   //ads data getting from firestore and push to app
 
-  // console.log(adsData);
   const [adsData, setadsData] = useState([]);
   const pushadsData = (e) => {
     setadsData(e);
+  };
+  // setting data for adsdeail page
+  const [adsDetail, setadsDetail] = useState();
+
+  const pushadsDetail = (e) => {
+    setadsDetail(e);
   };
 
   return (
@@ -98,7 +103,9 @@ function App() {
           }}
         >
           <CheckAuthProvider value={{ user, acessUser, denieUser }}>
-            <FireStoreDataProvider value={{ adsData, pushadsData }}>
+            <FireStoreDataProvider
+              value={{ adsData, pushadsData, pushadsDetail, adsDetail }}
+            >
               <Header />
               <Outlet />
               {footer && <Footer />}

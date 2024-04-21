@@ -1,13 +1,17 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 
 import { useNavigate } from "react-router-dom";
+import useFireStoreData from "../Hooks/fireStoreData";
 function AdsCard(prop) {
-  const { price, location, placeview, image, host } = prop;
-
+  const { price, location, placeview, image, host, id } = prop;
+  // console.log(id);
   const review = Math.round(Math.random() * 100 + 1);
   const navigate = useNavigate();
 
+  const { pushadsDetail } = useFireStoreData();
+
   const handleNavigate = () => {
+    pushadsDetail(id);
     navigate("/adsdetail");
   };
   return (

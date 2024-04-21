@@ -25,6 +25,7 @@ function YourHome() {
   const [aboutPlace, setaboutPlace] = useState("");
   const [image, setimage] = useState([]);
   const [fields, setfields] = useState(true);
+  const [city, setcity] = useState("");
   // const [currentUser, setcurrentUser] = useState();
 
   const handleNextStep = () => {
@@ -78,6 +79,11 @@ function YourHome() {
   const yourfields = (e) => {
     setfields(e);
   };
+
+  const yourcity = (e) => {
+    setcity(e);
+  };
+
   const [next, setnext] = useState(true);
 
   useEffect(() => {
@@ -99,6 +105,7 @@ function YourHome() {
         bathrom,
         image,
         fields,
+        city,
         yourhost,
         yourlocation,
         yourplaceView,
@@ -111,6 +118,7 @@ function YourHome() {
         yourbathrom,
         yourimage,
         yourfields,
+        yourcity,
       }}
     >
       {currentStep === 1 && <Home1 />}
