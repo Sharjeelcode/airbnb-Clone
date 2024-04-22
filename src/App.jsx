@@ -8,6 +8,8 @@ import { SigninModalProvider } from "./Hooks/signinModal";
 import { FireStoreDataProvider } from "./Hooks/fireStoreData";
 // import "rsuite/styles/index.less";
 import { CustomProvider } from "rsuite";
+import { collection, getDocs } from "firebase/firestore";
+import { database } from "./Firebase/config";
 function App() {
   const [footer, setfooter] = useState(false);
   const [user, setuser] = useState(null);
@@ -81,7 +83,23 @@ function App() {
     setadsData(e);
   };
   // setting data for adsdeail page
-  const [adsDetail, setadsDetail] = useState();
+  const [adsDetail, setadsDetail] = useState(0);
+
+  const FireStoreDataFetch = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(database, "Ads"));
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      pushadsData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    FireStoreDataFetch();
+  }, []);
 
   const pushadsDetail = (e) => {
     setadsDetail(e);
@@ -104,7 +122,13 @@ function App() {
         >
           <CheckAuthProvider value={{ user, acessUser, denieUser }}>
             <FireStoreDataProvider
-              value={{ adsData, pushadsData, pushadsDetail, adsDetail }}
+              value={{
+                adsData,
+                pushadsData,
+                pushadsDetail,
+                adsDetail,
+                FireStoreDataFetch,
+              }}
             >
               <Header />
               <Outlet />

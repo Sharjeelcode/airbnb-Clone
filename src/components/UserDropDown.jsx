@@ -13,7 +13,7 @@ function UserDropDown() {
   };
 
   const { denieUser } = useCheckAuth();
-  const location = useLocation();
+
   const auth = getAuth();
   useEffect(() => {
     if (auth.currentUser.photoURL !== null) {

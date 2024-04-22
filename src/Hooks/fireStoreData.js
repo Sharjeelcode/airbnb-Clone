@@ -5,6 +5,7 @@ export const fireStoreData = createContext({
   pushadsData: () => {},
   adsDetail: 0,
   pushadsDetail: () => {},
+  FireStoreDataFetch: () => {},
 });
 
 export const FireStoreDataProvider = fireStoreData.Provider;
