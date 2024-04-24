@@ -4,11 +4,7 @@ import { Button, div } from "@material-tailwind/react";
 function CardsLoader() {
   return (
     <div className="w-64 animate-pulse">
-      <div
-        shadow={false}
-        floated={false}
-        className="relative grid w-64 h-60 rounded-lg place-items-center bg-gray-300"
-      >
+      <div className="relative grid w-64 h-60 rounded-lg place-items-center bg-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

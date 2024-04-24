@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useId, useLayoutEffect, useState } from "react";
 import { database } from "../Firebase/config";
 import useFireStoreData, {
   FireStoreDataProvider,
@@ -8,7 +8,7 @@ import AdsCard from "../components/AdsCard";
 import CardsLoader from "../components/CardsLoader";
 
 function Landingpage() {
-  const { adsData, pushadsData } = useFireStoreData();
+  const [adsData, setadsData] = useState([]);
   const [loader, setloader] = useState(true);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function Landingpage() {
       const querySnapshot = await getDocs(collection(database, "Ads"));
       const data = [];
       querySnapshot.forEach((doc) => {
-        data.unshift(doc.data());
+        data.unshift({ ...doc.data(), id: doc.id });
       });
-      pushadsData(data);
+      setadsData(data);
     } catch (error) {
       console.log(error);
     }
@@ -30,21 +30,20 @@ function Landingpage() {
   useEffect(() => {
     func();
   }, []);
-
   return (
     <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-4">
-      {adsData.map((ads, id) => {
+      {adsData.map((ads) => {
         return (
           <>
             <AdsCard
-              key={id}
+              key={ads.id}
               price={ads.price}
               location={ads.location}
               placeview={ads.placeView}
               image={ads.image}
               host={ads.host}
               city={ads.city}
-              id={id}
+              id={ads.id}
             />
           </>
         );

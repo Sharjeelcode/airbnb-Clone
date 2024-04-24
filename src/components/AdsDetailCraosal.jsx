@@ -1,9 +1,9 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import useFireStoreData from "../Hooks/fireStoreData";
 
-function AdsDetailCraosal() {
-  const { adsData, adsDetail } = useFireStoreData();
-
+function AdsDetailCraosal(prop) {
+  // const { adsData, adsDetail } = useFireStoreData();
+  const { image } = prop;
   return (
     <Carousel
       className="md:hidden rounded-xl w-full h-40"
@@ -56,8 +56,8 @@ function AdsDetailCraosal() {
         </IconButton>
       )}
     >
-      {adsData[adsDetail].image.map((url) => {
-        return <img src={url} className="w-full h-40" />;
+      {image.map((url, id) => {
+        return <img src={url} className="w-full h-40" key={id} />;
       })}
     </Carousel>
   );

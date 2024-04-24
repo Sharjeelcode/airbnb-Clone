@@ -83,23 +83,7 @@ function App() {
     setadsData(e);
   };
   // setting data for adsdeail page
-  const [adsDetail, setadsDetail] = useState(0);
-
-  const FireStoreDataFetch = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(database, "Ads"));
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.unshift(doc.data());
-      });
-      pushadsData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    FireStoreDataFetch();
-  }, []);
+  const [adsDetail, setadsDetail] = useState();
 
   const pushadsDetail = (e) => {
     setadsDetail(e);
@@ -123,11 +107,8 @@ function App() {
           <CheckAuthProvider value={{ user, acessUser, denieUser }}>
             <FireStoreDataProvider
               value={{
-                adsData,
-                pushadsData,
                 pushadsDetail,
                 adsDetail,
-                FireStoreDataFetch,
               }}
             >
               <Header />

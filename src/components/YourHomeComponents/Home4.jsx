@@ -75,13 +75,13 @@ function Home4() {
         city: city,
       });
       setpublish("hidden");
-      console.log("data added");
+
       navigate("/");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
-  console.log(city);
+
   return (
     <div>
       <h1 className="text-center mt-2 font-medium text-3xl">

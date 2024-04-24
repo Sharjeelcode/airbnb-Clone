@@ -1,11 +1,8 @@
 import { createContext, useContext } from "react";
 
 export const fireStoreData = createContext({
-  adsData: [],
-  pushadsData: () => {},
-  adsDetail: 0,
+  adsDetail: "",
   pushadsDetail: () => {},
-  FireStoreDataFetch: () => {},
 });
 
 export const FireStoreDataProvider = fireStoreData.Provider;

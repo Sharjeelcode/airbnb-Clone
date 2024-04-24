@@ -35,6 +35,7 @@ function UploadImages() {
           yourfields(false);
         } catch (error) {
           console.log(error.message);
+          setupload(false);
         }
       } else {
         setMessage("only images accepted");

@@ -68,9 +68,14 @@ function AdsCard(prop) {
         )}
       >
         {/* <Carousel className="rounded-xl w-64 h-64"> */}
-        {image.map((url) => {
+        {image.map((url, id) => {
           return (
-            <img src={url} className="w-64 h-60" onClick={handleNavigate} />
+            <img
+              src={url}
+              className="w-64 h-60"
+              onClick={handleNavigate}
+              key={id}
+            />
           );
         })}
       </Carousel>
