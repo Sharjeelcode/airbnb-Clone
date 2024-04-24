@@ -39,13 +39,9 @@ function UserDropDown() {
             className={`${menuBtn} absolute right-0 z-10 mt-3 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
           >
             <div className="flex flex-col w-48">
-              <NavLink className="text-gray-700 text-left px-4 py-2 text-sm hover:bg-gray-100">
-                Messages
-              </NavLink>
               <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
                 WishList
               </NavLink>
-              <hr />
               <NavLink
                 to={"/yourhome"}
                 onClick={() => setMenuBtn("hidden")}
@@ -53,11 +49,11 @@ function UserDropDown() {
               >
                 Airbnb your home
               </NavLink>
+              <hr />
+
               <NavLink className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">
                 Accounts
               </NavLink>
-              <hr />
-
               <button
                 onClick={denieUser}
                 className="text-gray-700 text-left px-4 py-2 text-sm hover:bg-gray-100"

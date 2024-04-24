@@ -49,7 +49,7 @@ function AdsDetail() {
           {/* mobile devices craosal */}
           <AdsDetailCraosal image={adsData.image} />
           {/* medium and large devices image gallery */}
-          <div className="hidden md:flex  my-3 justify-center">
+          <div className="hidden md:flex my-3">
             <div className="mr-2">
               <img
                 src={adsData.image[0] ? adsData.image[0] : detail5}

@@ -440,13 +440,7 @@ function Home4() {
             </div>
           </div>
           <UploadImages />
-          {!fields ? (
-            ""
-          ) : (
-            <p className="text-center text-red-500 text-sm">
-              Upload some images
-            </p>
-          )}
+
           <div className={`${publish}  flex justify-center my-1`}>
             <span className="px-4">Publishing </span> <Spinner />
           </div>
@@ -455,10 +449,9 @@ function Home4() {
             <button
               type="submit"
               disabled={fields}
-              className={`
-              ${fields}${
-                !fields ? "" : " bg-gray-400 cursor-wait"
-              }   text-white p-3 rounded bg-[#FE375C] cursor-pointer`}
+              className={`${
+                !fields ? "cursor-pointer" : " bg-gray-400 cursor-not-allowed"
+              }   text-white p-3 rounded bg-[#FE375C] `}
             >
               Publish your home
             </button>
