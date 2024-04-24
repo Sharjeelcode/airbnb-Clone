@@ -3,7 +3,7 @@ import searchicon from "../assets/search icon.png";
 
 function HeaderSeachBar() {
   return (
-    <div className="flex justify-center">
+    <div className="hidden md:flex justify-center">
       <div className="flex border-2 rounded-full shadow-md gap-3">
         <div className="px-4   flex flex-col  py-2 justify-center text-sm  rounded-full hover:bg-gray-100">
           <h1 className="text-xs text-left">Where</h1>

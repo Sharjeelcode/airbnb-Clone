@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function Catagorybar() {
   return (
     <Carousel
-      className="h-20 hidden"
+      className="h-20 hidden md:flex"
       prevArrow={({ handlePrev }) => (
         <IconButton
           variant="text"
@@ -54,7 +54,7 @@ function Catagorybar() {
         </IconButton>
       )}
     >
-      <div className="flex gap-12 h-full item-center justify-center">
+      <div className="flex md:gap-5 lg:gap-16 h-full item-center justify-center">
         <NavLink
           to={"/google"}
           className="flex flex-col items-center justify-center hover:border-b-2 border-black "
@@ -144,7 +144,7 @@ function Catagorybar() {
           <span className="text-sm mt-3">Historical homes</span>
         </NavLink>
       </div>
-      <div className="flex gap-12 h-full item-center justify-center">
+      <div className="flex md:gap-5 lg:gap-16 h-full item-center justify-center">
         <NavLink
           to={"/google"}
           className="flex flex-col items-center justify-center hover:border-b-2 border-black "
@@ -234,7 +234,7 @@ function Catagorybar() {
           <span className="text-sm mt-3">Canvas</span>
         </NavLink>
       </div>
-      <div className="flex gap-12 h-full item-center justify-center">
+      <div className="flex md:gap-5 lg:gap-16 h-full item-center justify-center">
         <NavLink
           to={"/google"}
           className="flex flex-col items-center justify-center hover:border-b-2 border-black "
