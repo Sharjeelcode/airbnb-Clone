@@ -16,9 +16,8 @@ function Header() {
   // checks the page location and changes the header
   const location = useLocation();
   useEffect(() => {
-    location.pathname === "/yourhome" || "/adsdetail"
-      ? setHead(false)
-      : setHead(true);
+    const validPaths = ["/yourhome", "/adsdetail"];
+    validPaths.includes(location.pathname) ? setHead(false) : setHead(true);
   }, [location.pathname]);
 
   return (
