@@ -5,19 +5,13 @@ function ImageGallery(prop) {
   const { gallery, handleGallery } = useFireStoreData();
   const { images } = prop;
 
-  //   const [images, setimages] = useState([]);
-  //   const prevAds = JSON.parse(localStorage.getItem("adsData"));
-
-  //   useEffect(() => {
-  //     setimages(prevAds.image);
-  //   }, []);
   return (
     <>
       {gallery === true ? (
         <div>
           <div>
             <div
-              className={` flex backdrop-blur-sm overflow-x-hidden   overflow-y-auto fixed  h-full left-0 right-0 inset-0 z-50 justify-center items-center`}
+              className={`flex backdrop-blur-sm overflow-x-hidden   overflow-y-auto fixed  h-full left-0 right-0 inset-0 z-50 justify-center items-center`}
             >
               <div className="relative w-[80vw] md:h-auto">
                 <div className="backdrop-blur-sm  rounded-lg shadow relative dark:bg-gray-700">

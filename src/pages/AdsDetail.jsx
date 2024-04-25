@@ -43,7 +43,11 @@ function AdsDetail() {
 
   return (
     <>
-      {adsData && <ImageGallery images={adsData.image} />}
+      {adsData && (
+        <div className="hidden md:block">
+          <ImageGallery images={adsData.image} />
+        </div>
+      )}
       {adsData && (
         <div onClick={handleGallery} className="px-5  md:px-36">
           <h1 className="mt-4 text-lg md:text-xl font-semibold ">
