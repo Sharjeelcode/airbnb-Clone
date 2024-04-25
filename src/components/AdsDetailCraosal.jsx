@@ -2,7 +2,6 @@ import { Carousel, IconButton } from "@material-tailwind/react";
 import useFireStoreData from "../Hooks/fireStoreData";
 
 function AdsDetailCraosal(prop) {
-  // const { adsData, adsDetail } = useFireStoreData();
   const { image } = prop;
   return (
     <Carousel

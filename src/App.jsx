@@ -89,6 +89,12 @@ function App() {
     setadsDetail(e);
   };
 
+  // adsDeatil image gallery
+  const [gallery, setGallery] = useState(false);
+  const handleGallery = () => {
+    gallery === true ? setGallery(false) : setGallery(true);
+    console.log("hello");
+  };
   return (
     <>
       <CustomProvider>
@@ -109,6 +115,8 @@ function App() {
               value={{
                 pushadsDetail,
                 adsDetail,
+                gallery,
+                handleGallery,
               }}
             >
               <Header />
