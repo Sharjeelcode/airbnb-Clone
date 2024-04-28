@@ -10,6 +10,8 @@ import CardsLoader from "../components/CardsLoader";
 function Landingpage() {
   const [adsData, setadsData] = useState([]);
   const [loader, setloader] = useState(true);
+  const [filterAds, setfilterAds] = useState(false);
+  const { adsCatagroy } = useFireStoreData();
 
   useEffect(() => {
     adsData.length > 0 ? setloader(false) : setloader(true);
@@ -27,27 +29,54 @@ function Landingpage() {
       console.log(error);
     }
   };
+
   useEffect(() => {
     func();
   }, []);
+
+  useEffect(() => {
+    adsCatagroy != "" ? setfilterAds(true) : setfilterAds(false);
+  }, [adsCatagroy]);
+  console.log(filterAds);
   return (
     <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center my-4">
-      {adsData.map((ads) => {
-        return (
-          <>
-            <AdsCard
-              key={ads.id}
-              price={ads.price}
-              location={ads.location}
-              placeview={ads.placeView}
-              image={ads.image}
-              host={ads.host}
-              city={ads.city}
-              id={ads.id}
-            />
-          </>
-        );
-      })}
+      {!filterAds &&
+        adsData.map((ads) => {
+          return (
+            <>
+              <AdsCard
+                key={ads.id}
+                price={ads.price}
+                location={ads.location}
+                placeview={ads.placeView}
+                image={ads.image}
+                host={ads.host}
+                city={ads.city}
+                id={ads.id}
+              />
+            </>
+          );
+        })}
+      {filterAds &&
+        adsData.map((ads) => {
+          return ads.placeView === adsCatagroy ? (
+            <>
+              <AdsCard
+                key={ads.id}
+                price={ads.price}
+                location={ads.location}
+                placeview={ads.placeView}
+                image={ads.image}
+                host={ads.host}
+                city={ads.city}
+                id={ads.id}
+              />
+            </>
+          ) : (
+            ""
+          );
+        })}
+
       {loader && (
         <>
           <CardsLoader />

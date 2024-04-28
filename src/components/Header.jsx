@@ -21,7 +21,7 @@ function Header() {
 
   return (
     <>
-      <div className="z-50  sticky bg-white top-0 border-b-2 md:pb-2 md:block">
+      <div className="z-50  sticky bg-white top-0 border-b-2  md:block">
         <div className=" px-1 md:px-10 h-16 flex items-center justify-between">
           <div className="xl:mr-40">
             <NavLink to={"/"} className="flex items-center gap-1">
