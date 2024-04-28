@@ -95,6 +95,12 @@ function App() {
     gallery === true ? setGallery(false) : setGallery(true);
     console.log("hello");
   };
+
+  const [adsCatagroy, setadsCatagroy] = useState("");
+
+  const handleAdsCatagory = (e) => {
+    setadsCatagroy(e);
+  };
   return (
     <>
       <CustomProvider>
@@ -117,6 +123,8 @@ function App() {
                 adsDetail,
                 gallery,
                 handleGallery,
+                adsCatagroy,
+                handleAdsCatagory,
               }}
             >
               <Header />

@@ -5,6 +5,8 @@ export const fireStoreData = createContext({
   pushadsDetail: () => {},
   gallery: "",
   handleGallery: () => {},
+  adsCatagroy: "",
+  handleAdsCatagory: () => {},
 });
 
 export const FireStoreDataProvider = fireStoreData.Provider;

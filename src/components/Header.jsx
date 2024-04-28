@@ -31,13 +31,13 @@ function Header() {
               </span>
             </NavLink>
           </div>
-          <div className="hidden  lg:flex gap-3 w-96  ">
+          <div className="hidden  lg:flex gap-2 w-96  ">
             <NavLink
               to={"/"}
               className={({ isActive }) =>
                 `${
                   isActive ? "text-black" : "text-gray-400"
-                } px-5 cursor-pointer text-md py-2  hover:bg-gray-100 hover:text-black rounded-full`
+                } px-4 cursor-pointer text-md py-2  hover:bg-gray-100 hover:text-black rounded-full`
               }
             >
               <span>Stays</span>
@@ -48,7 +48,7 @@ function Header() {
               className={({ isActive }) =>
                 `${
                   isActive ? "text-black" : "text-gray-400"
-                } px-3 cursor-pointer text-md py-2    hover:bg-gray-100 hover:text-black rounded-full`
+                } px-4 cursor-pointer text-md py-2    hover:bg-gray-100 hover:text-black rounded-full`
               }
             >
               Airbnb your home
