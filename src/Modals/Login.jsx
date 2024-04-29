@@ -24,7 +24,7 @@ function Login() {
       signInWithEmailAndPassword(auth, Email, password);
       acessUser;
     } catch (error) {
-      console.log(error);
+      console.log(error.code, error.message);
     }
   };
 
