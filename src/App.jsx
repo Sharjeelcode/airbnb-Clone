@@ -93,7 +93,6 @@ function App() {
   const [gallery, setGallery] = useState(false);
   const handleGallery = () => {
     gallery === true ? setGallery(false) : setGallery(true);
-    console.log("hello");
   };
 
   const [adsCatagroy, setadsCatagroy] = useState("");

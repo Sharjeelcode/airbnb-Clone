@@ -19,7 +19,7 @@ function ImageGallery(prop) {
                     <div className="flex w-full justify-end">
                       <button
                         onClick={handleGallery}
-                        className="relative text-white  top-8 right-2 z-50  text-2xl px-2 bg-gray-500 rounded-full"
+                        className="relative text-white  top-10 right-2 z-50  text-2xl px-2 bg-gray-500 rounded-full"
                       >
                         x
                       </button>
@@ -32,7 +32,7 @@ function ImageGallery(prop) {
                           color="white"
                           size="md"
                           onClick={handlePrev}
-                          className="!absolute top-[50%] left-1 bg-gray-500  -translate-y-2/4 rounded-full hover:bg-gray-500"
+                          className="!absolute top-[50%] left-3 bg-gray-500  -translate-y-2/4 rounded-full hover:bg-gray-500"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ function ImageGallery(prop) {
                           color="white"
                           size="md"
                           onClick={handleNext}
-                          className="!absolute top-[50%]  !right-1 bg-gray-500  -translate-y-2/4 rounded-full hover:bg-gray-500"
+                          className="!absolute top-[50%]  !right-3 bg-gray-500  -translate-y-2/4 rounded-full hover:bg-gray-500"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
