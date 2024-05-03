@@ -19,7 +19,7 @@ function ImageGallery(prop) {
                     <div className="flex w-full justify-end">
                       <button
                         onClick={handleGallery}
-                        className="relative text-white  top-10 right-2 z-50  text-2xl px-2 bg-gray-500 rounded-full"
+                        className="relative text-white  top-10 right-2 z-50  text-xl px-2 bg-gray-500 rounded-full"
                       >
                         x
                       </button>

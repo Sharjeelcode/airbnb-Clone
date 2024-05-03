@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import useSigninModal, { SigninModalProvider } from "../Hooks/signinModal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -12,45 +14,46 @@ import { faDiagramSuccessor } from "@fortawesome/free-solid-svg-icons";
 
 function Signup() {
   const { SignUpmodal, closeSignUpModal } = useSigninModal();
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
 
   const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  // signup with email pass
-  const HandleSignUp = async (e) => {
-    e.preventDefault();
+  const googleProvider = new GoogleAuthProvider();
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .min(8, "Too Short!")
+      .max(16, "Too Long!")
+      .required("Password is required"),
+  });
+
+  const handleGoogle = async () => {
+    try {
+      signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignUp = async (values, { setSubmitting, setFieldError }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        Email,
-        Password
+        values.email,
+        values.password
       );
       const user = userCredential.user;
-      await updateProfile(user, { displayName: Name });
+      await updateProfile(user, { displayName: values.name });
+      setSubmitting(false);
     } catch (error) {
-      console.log(error.code, error.message);
+      // console.log(error.code, error.message);
+      if (error.code === "auth/email-already-in-use") {
+        // Set custom error message for the email field
+        setFieldError("email", "Email already exists");
+      }
     }
   };
 
-  // signup with google
-  const handleGoogle = async () => {
-    try {
-      signInWithPopup(auth, provider);
-      const credential = await GoogleAuthProvider.credentialFromResult();
-      const token = await credential.accessToken;
-      const user = await result.user;
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      signInWithPopup(auth, provider);
-    }
-  };
   return (
     <div>
       <div className="max-w-2xl mx-auto ">
@@ -75,74 +78,97 @@ function Signup() {
                   </svg>
                 </button>
               </div>
-              <form className="space-y-6 px-6 pb-2" onSubmit={HandleSignUp}>
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Sign up to Airbnb
-                </h3>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-                  >
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Enter your Name"
-                    required
-                    value={Name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="name@company.com"
-                    required
-                    value={Email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-                  >
-                    Your password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required
-                    value={Password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
+              <Formik
+                initialValues={{
+                  name: "",
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSignUp}
+              >
+                {({ isSubmitting }) => (
+                  <Form className="space-y-6 px-6 pb-2">
+                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                      Sign up to Airbnb
+                    </h3>
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+                      >
+                        Your Name
+                      </label>
+                      <Field
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your Name"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <ErrorMessage
+                        name="name"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+                      >
+                        Your email
+                      </label>
+                      <Field
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="name@company.com"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="password"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+                      >
+                        Your password
+                      </label>
+                      <Field
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="••••••••"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <ErrorMessage
+                        name="password"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
 
-                <button
-                  type="submit"
-                  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Login to your account
-                </button>
-              </form>
+                    <button
+                      type="submit"
+                      className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting
+                        ? "Signing up..."
+                        : "Sign up to your account"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
               <div className="flex justify-center px-6 pb-2 sm:pb-4 xl:pb-8">
                 <button
                   onClick={handleGoogle}
-                  class="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="w-full border-none outline-none justify-center flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <svg
                     className="h-6 w-6 mr-2"

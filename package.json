@@ -26,6 +26,7 @@
     "embla-carousel-react": "^8.0.2",
     "firebase": "^10.11.0",
     "flowbite": "^2.3.0",
+    "formik": "^2.4.6",
     "jsconfig.json": "^2.3.3",
     "lucide-react": "^0.368.0",
     "radix-ui": "^1.0.1",
@@ -35,7 +36,8 @@
     "react-router-dom": "^6.22.3",
     "rsuite": "^5.59.1",
     "tailwind-merge": "^2.2.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
