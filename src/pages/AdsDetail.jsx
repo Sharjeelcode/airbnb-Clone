@@ -57,7 +57,7 @@ function AdsDetail() {
           {/* mobile devices craosal */}
           <AdsDetailCraosal image={adsData.image} />
           {/* medium and large devices image gallery */}
-          <div className="relative hidden md:flex my-3">
+          <div className="relative hidden md:flex my-3 cursor-pointer">
             <div className="mr-2">
               {adsData.image[0] && (
                 <img
