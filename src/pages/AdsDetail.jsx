@@ -49,7 +49,7 @@ function AdsDetail() {
         </div>
       )}
       {adsData && (
-        <div onClick={handleGallery} className="px-5  md:px-36">
+        <div className="px-5  md:px-36">
           <h1 className="mt-4 text-lg md:text-xl font-semibold ">
             {/* Sooty's Hideout ~ Beat the Blues Room */}
             {adsData.placeName.toUpperCase()}
@@ -57,8 +57,11 @@ function AdsDetail() {
           {/* mobile devices craosal */}
           <AdsDetailCraosal image={adsData.image} />
           {/* medium and large devices image gallery */}
-          <div className="relative hidden md:flex my-3 cursor-pointer">
-            <div className="mr-2">
+          <div
+            onClick={handleGallery}
+            className="relative hidden md:flex my-3 cursor-pointer"
+          >
+            <div className="mr-2 ">
               {adsData.image[0] && (
                 <img
                   src={adsData.image[0]}
