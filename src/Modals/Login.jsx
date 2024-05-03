@@ -1,5 +1,7 @@
 import { useState } from "react";
 import useSigninModal from "../Hooks/signinModal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -11,20 +13,26 @@ function Login() {
   const { LoginModal, closeLoginModal } = useSigninModal();
   const [Email, setEmail] = useState("");
   const [password, setpassword] = useState("");
-
   const { acessUser } = useCheckAuth();
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
   // Signin with id pass
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (values, { setSubmitting, setFieldError }) => {
     try {
-      signInWithEmailAndPassword(auth, Email, password);
-      acessUser;
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      acessUser();
+      setSubmitting(false);
     } catch (error) {
-      console.log(error.code, error.message);
+      if (error.code === "auth/invalid-credential") {
+        setFieldError("password", "Invalid credentials");
+      }
     }
   };
 
@@ -61,54 +69,70 @@ function Login() {
                   </svg>
                 </button>
               </div>
-              <form className="space-y-6 px-6 pb-2" action="#">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Sign in to Airbnb
-                </h3>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={Email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Enter your Name"
-                    required=""
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
-                  >
-                    Your password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setpassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required=""
-                  />
-                </div>
+              <Formik
+                initialValues={{
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleLogin}
+              >
+                {({ isSubmitting }) => (
+                  <Form className="space-y-6 px-6 pb-2">
+                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                      Sign in to Airbnb
+                    </h3>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+                      >
+                        Your email
+                      </label>
+                      <Field
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="name@company.com"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="password"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
+                      >
+                        Your password
+                      </label>
+                      <Field
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="••••••••"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <ErrorMessage
+                        name="password"
+                        component="div"
+                        className="text-red-500 text-xs mt-1"
+                      />
+                    </div>
 
-                <button
-                  type="submit"
-                  onClick={handleLogin}
-                  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Login to your account
-                </button>
-              </form>
+                    <button
+                      type="submit"
+                      className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Logging in..." : "Login to your account"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
               <div className="flex justify-center px-6 pb-2 sm:pb-4 xl:pb-8">
                 <button
                   onClick={handleGoogle}
