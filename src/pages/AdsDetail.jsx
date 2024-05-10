@@ -2,30 +2,25 @@ import React, { useEffect, useState } from "react";
 import Placeoffer from "../components/Placeoffer";
 import AdsDetailCraosal from "../components/AdsDetailCraosal";
 import useFireStoreData from "../Hooks/fireStoreData";
-import detail1 from "../assets/detail1.jpg";
-import detail3 from "../assets/detail3.jpeg";
-import detail4 from "../assets/detail4.jpg";
-import detail5 from "../assets/detail5.jpeg";
 import randomProfile from "../assets/profile pic.webp";
 import { Spinner } from "@material-tailwind/react";
 import { doc, getDoc } from "firebase/firestore";
 import { database } from "../Firebase/config";
 import ImageGallery from "../Modals/ImageGallery";
+import { useParams } from "react-router-dom";
 function AdsDetail() {
-  const { adsDetail } = useFireStoreData();
   const [loading, setloading] = useState(true);
-  const [adsData, setadsData] = useState();
+  const [adsDatas, setadsData] = useState();
+  const paramid = useParams();
 
   const getAdsData = async () => {
     try {
-      const docRef = doc(database, "Ads", adsDetail);
+      const docRef = doc(database, "Ads", paramid.id);
       const docSnap = await getDoc(docRef);
       const data = docSnap.data();
       setadsData(data);
-      localStorage.setItem("adsData", JSON.stringify(data));
     } catch (error) {
-      const prevAds = JSON.parse(localStorage.getItem("adsData"));
-      setadsData(prevAds);
+      console.log(error.message);
     }
   };
 
@@ -34,74 +29,74 @@ function AdsDetail() {
   }, []);
 
   useEffect(() => {
-    adsData && adsData && adsData.placeName != undefined
+    adsDatas && adsDatas && adsDatas.placeName != undefined
       ? setloading(false)
       : setloading(true);
-  }, [adsData, adsData]);
+  }, [adsDatas, adsDatas]);
 
   const { handleGallery } = useFireStoreData();
 
   return (
     <>
-      {adsData && (
+      {adsDatas && (
         <div className="hidden md:block">
-          <ImageGallery images={adsData.image} />
+          <ImageGallery images={adsDatas.image} />
         </div>
       )}
-      {adsData && (
+      {adsDatas && (
         <div className="px-5  md:px-36">
           <h1 className="mt-4 text-lg md:text-xl font-semibold ">
             {/* Sooty's Hideout ~ Beat the Blues Room */}
-            {adsData.placeName.toUpperCase()}
+            {adsDatas.placeName.toUpperCase()}
           </h1>
           {/* mobile devices craosal */}
-          <AdsDetailCraosal image={adsData.image} />
+          <AdsDetailCraosal image={adsDatas.image} />
           {/* medium and large devices image gallery */}
           <div
             onClick={handleGallery}
             className="relative hidden md:flex my-3 cursor-pointer"
           >
             <div className="mr-2 ">
-              {adsData.image[0] && (
+              {adsDatas.image[0] && (
                 <img
-                  src={adsData.image[0]}
+                  src={adsDatas.image[0]}
                   alt=""
                   className={` ${
-                    !adsData.image[1]
+                    !adsDatas.image[1]
                       ? "w-[60vw] h-[310px]"
                       : "md:w-[560px] h-[310px]"
                   } rounded-l-lg`}
                 />
               )}
             </div>
-            {adsData.image[1] && (
+            {adsDatas.image[1] && (
               <div className=" grid grid-cols-2 gap-x-2 gap-y-1">
-                {adsData.image[1] && (
+                {adsDatas.image[1] && (
                   <img
-                    src={adsData.image[1]}
+                    src={adsDatas.image[1]}
                     alt=""
                     className="w-[272px] h-[150px]"
                   />
                 )}
-                {adsData.image[2] && (
+                {adsDatas.image[2] && (
                   <img
-                    src={adsData.image[2]}
+                    src={adsDatas.image[2]}
                     alt=""
                     className="w-[272px] h-[150px] rounded-r-lg"
                   />
                 )}
-                {adsData.image[3] && (
+                {adsDatas.image[3] && (
                   <img
-                    src={adsData.image[3]}
+                    src={adsDatas.image[3]}
                     alt=""
                     className="w-[272px] h-[150px]"
                   />
                 )}
 
-                {adsData.image[4] && (
+                {adsDatas.image[4] && (
                   <div>
                     <img
-                      src={adsData.image[4]}
+                      src={adsDatas.image[4]}
                       alt=""
                       className=" w-[272px] h-[150px] rounded-r-lg"
                     />
@@ -121,14 +116,14 @@ function AdsDetail() {
           <div className=" grid grid-cols-1 md:grid-cols-2 justify-between">
             <div className="md:w-[655px]">
               <h1 className="text-lg font-medium my-1">
-                Room in {adsData.location} {adsData.city}, Pakistan
+                Room in {adsDatas.location} {adsDatas.city}, Pakistan
               </h1>
               <div className="text-sm">
-                <span>{adsData.bed} bed</span>{" "}
+                <span>{adsDatas.bed} bed</span>{" "}
                 <span className="text-start">.</span>{" "}
-                <span>{adsData.bedroom} Bedroom</span>{" "}
+                <span>{adsDatas.bedroom} Bedroom</span>{" "}
                 <span className="text-start">. </span>
-                <span>{adsData.bathrom} Bathroom</span>
+                <span>{adsDatas.bathrom} Bathroom</span>
               </div>
               <hr className="my-4 " />
               <div className="flex gap-4">
@@ -140,14 +135,14 @@ function AdsDetail() {
                   />
                 </div>
                 <div>
-                  <h1 className="font-medium">Hosted by {adsData.host}</h1>
+                  <h1 className="font-medium">Hosted by {adsDatas.host}</h1>
                   <p className="text-sm">2 years hosting</p>
                 </div>
               </div>
               <hr className="my-4 " />
               <div>
                 <h1 className="text-xl font-medium py-4">About this place</h1>
-                <p>{adsData.aboutPlace}</p>
+                <p>{adsDatas.aboutPlace}</p>
               </div>
               <hr className="my-4 " />
               <div className="">

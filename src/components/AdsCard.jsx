@@ -7,12 +7,8 @@ function AdsCard(prop) {
   // console.log(id);
   const review = Math.round(Math.random() * 100 + 1);
   const navigate = useNavigate();
-
-  const { pushadsDetail } = useFireStoreData();
-
   const handleNavigate = () => {
-    pushadsDetail(id);
-    navigate("/adsdetail");
+    navigate(`/adsdetail/${id}`);
   };
   return (
     <div className="w-64 h-96 cursor-pointer">

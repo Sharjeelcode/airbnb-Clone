@@ -6,16 +6,17 @@ import UserDropDown from "./UserDropDown";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import useCheckAuth, { CheckAuthProvider, checkAuth } from "../Hooks/checkAuth";
 import Catagorybar from "./Catagorybar";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { ScissorsLineDashedIcon } from "lucide-react";
 function Header() {
   const [Head, setHead] = useState(true);
   const { user } = useCheckAuth();
   ScissorsLineDashedIcon;
   // checks the page location and changes the header
+  const id = useParams();
   const location = useLocation();
   useEffect(() => {
-    const validPaths = ["/yourhome", "/adsdetail"];
+    const validPaths = ["/yourhome", `/adsdetail/${id.id}`];
     validPaths.includes(location.pathname) ? setHead(false) : setHead(true);
   }, [location.pathname]);
 

@@ -1,8 +1,6 @@
 import { createContext, useContext } from "react";
 
 export const fireStoreData = createContext({
-  adsDetail: "",
-  pushadsDetail: () => {},
   gallery: "",
   handleGallery: () => {},
   adsCatagroy: "",

@@ -78,10 +78,6 @@ function App() {
 
   //ads data getting from firestore and push to app
 
-  const [adsData, setadsData] = useState([]);
-  const pushadsData = (e) => {
-    setadsData(e);
-  };
   // setting data for adsdeail page
   const [adsDetail, setadsDetail] = useState();
 
@@ -100,6 +96,7 @@ function App() {
   const handleAdsCatagory = (e) => {
     setadsCatagroy(e);
   };
+
   return (
     <>
       <CustomProvider>
@@ -118,11 +115,9 @@ function App() {
           <CheckAuthProvider value={{ user, acessUser, denieUser }}>
             <FireStoreDataProvider
               value={{
-                pushadsDetail,
-                adsDetail,
                 gallery,
-                handleGallery,
                 adsCatagroy,
+                handleGallery,
                 handleAdsCatagory,
               }}
             >

@@ -18,7 +18,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Landingpage />} />
       <Route path="yourhome" element={<YourHome />} />
-      <Route path="adsdetail" element={<AdsDetail />} />
+      <Route path="adsdetail/:id" element={<AdsDetail />} />
     </Route>
   )
 );
