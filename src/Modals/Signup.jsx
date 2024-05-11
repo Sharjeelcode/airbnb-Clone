@@ -11,13 +11,15 @@ import {
 } from "firebase/auth";
 import { app, auth, provider } from "../Firebase/config";
 import { faDiagramSuccessor } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Signup() {
   const { SignUpmodal, closeSignUpModal } = useSigninModal();
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -26,12 +28,14 @@ function Signup() {
       .max(16, "Too Long!")
       .required("Password is required"),
   });
-
   const handleGoogle = async () => {
     try {
-      signInWithPopup(auth, googleProvider);
+      await signInWithPopup(auth, googleProvider);
+      if (location.pathname === "/yourhome") {
+        navigate("/yourhome2");
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -44,7 +48,10 @@ function Signup() {
       );
       const user = userCredential.user;
       await updateProfile(user, { displayName: values.name });
-      setSubmitting(false);
+      if (location.pathname === "/yourhome") {
+        navigate("/yourhome2");
+      }
+      await setSubmitting(false);
     } catch (error) {
       // console.log(error.code, error.message);
       if (error.code === "auth/email-already-in-use") {

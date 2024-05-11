@@ -30,6 +30,9 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       acessUser();
+      if (location.pathname === "/yourhome") {
+        navigate("/yourhome2");
+      }
       setSubmitting(false);
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
@@ -37,7 +40,7 @@ function Login() {
       }
     }
   };
-  console.log(location.pathname === "/yourhome");
+
   // signin with google
   const handleGoogle = async () => {
     try {

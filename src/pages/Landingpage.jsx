@@ -25,10 +25,7 @@ function Landingpage() {
       querySnapshot.forEach((doc) => {
         data.unshift({ ...doc.data(), id: doc.id });
       });
-      console.log(data);
-      const sort = data.sort();
-      console.log(sort);
-      setadsData(sort);
+      setadsData(data);
     } catch (error) {
       console.log(error);
     }
