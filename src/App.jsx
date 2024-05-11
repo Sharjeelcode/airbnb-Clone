@@ -10,15 +10,30 @@ import { FireStoreDataProvider } from "./Hooks/fireStoreData";
 import { CustomProvider } from "rsuite";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "./Firebase/config";
+import { LocalDataStoreProvider } from "./Hooks/localDataStore";
+import { set } from "rsuite/esm/utils/dateUtils";
 function App() {
   const [footer, setfooter] = useState(false);
   const [user, setuser] = useState(null);
   const [menuBtn, setMenuBtn] = useState("hidden");
   const [SignUpmodal, setSignUpmodal] = useState();
   const [LoginModal, setSignLoginModal] = useState();
-
+  const [currentStep, setCurrentStep] = useState(1);
+  const [placeView, setplaceView] = useState();
+  const [guest, setguest] = useState("");
+  const [bedroom, setbedroom] = useState("");
+  const [bed, setbed] = useState("");
+  const [bathrom, setbathrom] = useState("");
+  const [host, sethost] = useState("");
+  const [location, setlocation] = useState("");
+  const [placeName, setplaceName] = useState("");
+  const [price, setprice] = useState("");
+  const [aboutPlace, setaboutPlace] = useState("");
+  const [fields, setfields] = useState(true);
+  const [city, setcity] = useState("");
+  const [imgFiles, setimgFiles] = useState([]);
   // render footer according to pageLocation
-  const location = useLocation();
+  const locations = useLocation();
   useEffect(() => {
     location.pathname === "/yourhome" ? setfooter(false) : setfooter(true);
   }, [location.pathname]);
@@ -96,7 +111,49 @@ function App() {
   const handleAdsCatagory = (e) => {
     setadsCatagroy(e);
   };
+  //your home pages
+  const yourplaceView = (e) => {
+    setplaceView(e);
+  };
+  const yourguest = (e) => {
+    setguest(e);
+  };
+  const yourbedroom = (e) => {
+    setbedroom(e);
+  };
+  const yourbed = (e) => {
+    setbed(e);
+  };
+  const yourbathrom = (e) => {
+    setbathrom(e);
+  };
+  const yourhost = (e) => {
+    sethost(e);
+  };
+  const yourlocation = (e) => {
+    setlocation(e);
+  };
+  const yourplaceName = (e) => {
+    setplaceName(e);
+  };
+  const youraboutPlace = (e) => {
+    setaboutPlace(e);
+  };
+  const yourprice = (e) => {
+    setprice(e);
+  };
 
+  const yourfields = (e) => {
+    setfields(e);
+  };
+
+  const yourcity = (e) => {
+    setcity(e);
+  };
+
+  const handleImgFiles = (e) => {
+    setimgFiles(e);
+  };
   return (
     <>
       <CustomProvider>
@@ -121,9 +178,39 @@ function App() {
                 handleAdsCatagory,
               }}
             >
-              <Header />
-              <Outlet />
-              {footer && <Footer />}
+              <LocalDataStoreProvider
+                value={{
+                  host,
+                  location,
+                  placeName,
+                  price,
+                  aboutPlace,
+                  placeView,
+                  guest,
+                  bedroom,
+                  bed,
+                  bathrom,
+                  fields,
+                  city,
+                  imgFiles,
+                  yourhost,
+                  yourlocation,
+                  yourplaceView,
+                  yourplaceName,
+                  youraboutPlace,
+                  yourprice,
+                  yourguest,
+                  yourbedroom,
+                  yourbed,
+                  yourbathrom,
+                  yourfields,
+                  yourcity,
+                  handleImgFiles,
+                }}
+              >
+                <Header />
+                <Outlet />
+              </LocalDataStoreProvider>
             </FireStoreDataProvider>
           </CheckAuthProvider>
         </SigninModalProvider>

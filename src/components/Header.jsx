@@ -16,7 +16,13 @@ function Header() {
   const id = useParams();
   const location = useLocation();
   useEffect(() => {
-    const validPaths = ["/yourhome", `/adsdetail/${id.id}`];
+    const validPaths = [
+      "/yourhome",
+      "/yourhome2",
+      "/yourhome3",
+      "/yourhome4",
+      `/adsdetail/${id.id}`,
+    ];
     validPaths.includes(location.pathname) ? setHead(false) : setHead(true);
   }, [location.pathname]);
 

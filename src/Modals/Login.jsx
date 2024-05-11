@@ -9,6 +9,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import useCheckAuth from "../Hooks/checkAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 function Login() {
   const { LoginModal, closeLoginModal } = useSigninModal();
   const [Email, setEmail] = useState("");
@@ -22,7 +23,8 @@ function Login() {
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   // Signin with id pass
   const handleLogin = async (values, { setSubmitting, setFieldError }) => {
     try {
@@ -35,12 +37,15 @@ function Login() {
       }
     }
   };
-
+  console.log(location.pathname === "/yourhome");
   // signin with google
   const handleGoogle = async () => {
     try {
-      signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
       acessUser;
+      if (location.pathname === "/yourhome") {
+        navigate("/yourhome2");
+      }
     } catch (error) {
       console.log(error);
     }

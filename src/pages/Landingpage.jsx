@@ -6,6 +6,7 @@ import useFireStoreData, {
 } from "../Hooks/fireStoreData";
 import AdsCard from "../components/AdsCard";
 import CardsLoader from "../components/CardsLoader";
+import Footer from "../components/Footer";
 
 function Landingpage() {
   const [adsData, setadsData] = useState([]);
@@ -24,7 +25,10 @@ function Landingpage() {
       querySnapshot.forEach((doc) => {
         data.unshift({ ...doc.data(), id: doc.id });
       });
-      setadsData(data);
+      console.log(data);
+      const sort = data.sort();
+      console.log(sort);
+      setadsData(sort);
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +94,7 @@ function Landingpage() {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 }

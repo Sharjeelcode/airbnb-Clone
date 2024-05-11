@@ -12,9 +12,9 @@ export const localDataStore = createContext({
   bedroom: 0,
   bed: 0,
   bathrom: 0,
-  image: [],
   fields: true,
   city: "Karachi",
+  imgFiles: [],
   yourhost: () => {},
   yourlocation: () => {},
   yourplaceName: () => {},
@@ -25,9 +25,9 @@ export const localDataStore = createContext({
   yourbedroom: () => {},
   yourbed: () => {},
   yourbathrom: () => {},
-  yourimage: () => {},
   yourfields: () => {},
   yourcity: () => {},
+  handleImgFiles: () => {},
 });
 
 export const LocalDataStoreProvider = localDataStore.Provider;

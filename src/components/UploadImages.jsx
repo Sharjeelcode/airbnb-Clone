@@ -1,42 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { storage } from "../Firebase/config";
 import useLocalDataStore from "../Hooks/localDataStore";
 import { Spinner } from "@material-tailwind/react";
+
 function UploadImages() {
   const [files, setFile] = useState([]);
   const [message, setMessage] = useState();
   const { yourimage, yourfields } = useLocalDataStore();
   const [upload, setupload] = useState(false);
-  const auth = getAuth();
-  // upload to firebase
+
+  const { handleImgFiles } = useLocalDataStore();
+  useEffect(() => {
+    handleImgFiles(files);
+  }, [files]);
 
   const handleFile = async (e) => {
     setMessage("");
     let uploadedFile = e.target.files;
-    yourfields(true);
-    setupload(true);
+
     for (let i = 0; i < uploadedFile.length; i++) {
       const fileType = uploadedFile[i]["type"];
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, uploadedFile[i]]);
-        try {
-          const imageRef = ref(
-            storage,
-            `${auth.currentUser.email}/${uploadedFile[0].name}`
-          );
-          await uploadBytes(imageRef, uploadedFile[i]);
-          const url = await getDownloadURL(imageRef);
-          yourimage(url);
-          setupload(false);
-          console.log("UPLOADED");
-          yourfields(false);
-        } catch (error) {
-          console.log(error.message);
-          setupload(false);
-        }
       } else {
         setMessage("only images accepted");
         setupload(false);
